@@ -1,0 +1,63 @@
+@font-face {
+  font-family: 'etimatic';
+  src: url('fonts/etimatic.ttf?phytmu') format('truetype'), url('fonts/etimatic.woff?phytmu') format('woff'),
+    url('fonts/etimatic.svg?phytmu#etimatic') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+icon,
+.icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'etimatic' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  white-space: pre;
+
+  /* Enable Ligatures ================ */
+  letter-spacing: 0;
+  -webkit-font-feature-settings: 'liga';
+  -moz-font-feature-settings: 'liga=1';
+  -moz-font-feature-settings: 'liga';
+  -ms-font-feature-settings: 'liga' 1;
+  font-feature-settings: 'liga';
+  -webkit-font-variant-ligatures: discretionary-ligatures;
+  font-variant-ligatures: discretionary-ligatures;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-file-blank:before {
+  content: '\e900';
+}
+.icon-folder-open:before {
+  content: '\e901';
+}
+.icon-id-card:before {
+  content: '\e902';
+}
+.icon-log-out:before {
+  content: '\e903';
+}
+.icon-love-off:before {
+  content: '\e904';
+}
+.icon-phone-call:before {
+  content: '\e905';
+}
+.icon-play:before {
+  content: '\e906';
+}
+.icon-shopping-bag:before {
+  content: '\e907';
+}
+.icon-user:before {
+  content: '\e908';
+}
