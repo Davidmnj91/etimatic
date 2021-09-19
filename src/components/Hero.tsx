@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { PrimaryButton } from './atoms/Button';
 
 const findScrollableParent = node => {
   if (node == null) {
@@ -14,7 +15,8 @@ const findScrollableParent = node => {
 
 const HeroContainer = styled.div`
   position: relative;
-  height: calc(80vh - 80px);
+  height: calc(100vh - 80px - 10em);
+  margin: 5em;
 `;
 
 const TextContainer = styled.div`
@@ -25,7 +27,7 @@ const TextContainer = styled.div`
   background-position: center;
 
   width: 100%;
-  height: calc(80vh - 80px);
+  height: 100%;
 `;
 
 const BagImage = styled.div`
@@ -35,28 +37,16 @@ const BagImage = styled.div`
   background-repeat: no-repeat;
   background-position: center;
   width: 100%;
-  height: calc(80vh - 80px);
+  height: calc(100% - 5em);
   top: 5em;
+  opacity: 0.85;
 `;
 
-const CTA = styled.button`
+const CTA = styled(PrimaryButton)`
   position: absolute;
   top: 75%;
   left: 50%;
   transform: translateX(-50%);
-
-  padding: 10px;
-  background: #393939;
-  border: 3px solid #393939;
-  box-sizing: border-box;
-  border-radius: 2px;
-
-  font-weight: 900;
-  font-size: 18px;
-  line-height: 22px;
-  color: #ffffff;
-
-  cursor: pointer;
 `;
 
 const Hero = () => {
@@ -64,7 +54,7 @@ const Hero = () => {
     <HeroContainer>
       <TextContainer />
       <BagImage />
-      <CTA>NECESITO PACKAGING</CTA>
+      <CTA>Necesito Packaging</CTA>
     </HeroContainer>
   );
 };

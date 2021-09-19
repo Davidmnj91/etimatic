@@ -5,11 +5,17 @@ export type Palette = {
 
 export type CustomTheme = {
   background: string;
+  accent: string;
   foreground: string;
   warnPalette?: Palette;
 };
 
-export const buildTheme = (background: string, foreground: string, warnPalette?: Palette): CustomTheme => {
+export const buildTheme = (
+  background: string,
+  accent: string,
+  foreground: string,
+  warnPalette?: Palette
+): CustomTheme => {
   const defaultWarnPalette: Palette = {
     main: '#d32f2f',
     contrastText: '#fff',
@@ -17,6 +23,7 @@ export const buildTheme = (background: string, foreground: string, warnPalette?:
 
   const theme: CustomTheme = {
     background,
+    accent,
     foreground,
     warnPalette: warnPalette || defaultWarnPalette,
   };
@@ -24,4 +31,4 @@ export const buildTheme = (background: string, foreground: string, warnPalette?:
   return theme;
 };
 
-export const lightTheme = buildTheme('#fff', '#5E5E5E');
+export const lightTheme = buildTheme('#fff', '#00FFA3', '#393939');

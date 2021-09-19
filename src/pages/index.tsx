@@ -2,6 +2,7 @@ import Head from 'next/head';
 import AboutUsSection from '../components/AboutUsSection';
 import BoxSection from '../components/BoxSection';
 import CatalogSection from '../components/CatalogSection';
+import Footer from '../components/Footer';
 import Hero from '../components/Hero';
 
 export const Home = () => (
@@ -14,6 +15,7 @@ export const Home = () => (
     <BoxSection />
     <CatalogSection />
     <AboutUsSection />
+    <Footer />
   </>
 );
 
