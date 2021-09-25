@@ -15,8 +15,8 @@ const findScrollableParent = node => {
 
 const HeroContainer = styled.div`
   position: relative;
-  height: calc(100vh - 80px - 10em);
-  margin: 5em;
+  height: calc(100vh - 80px - 5em);
+  margin: 5em 5em 0;
 `;
 
 const TextContainer = styled.div`

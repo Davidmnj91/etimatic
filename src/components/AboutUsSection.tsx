@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const AboutUsContainer = styled.div`
   background-image: url('images/about_us.png');
-  height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -24,7 +23,7 @@ const AboutUsContent = styled.span`
   margin-left: 5em;
   font-size: 36px;
   color: ${props => props.theme.background};
-  flex: 0 0 40%;
+  flex: 0 0 60%;
   word-break: break-word;
   line-height: 48px;
 `;

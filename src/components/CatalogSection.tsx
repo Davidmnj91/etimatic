@@ -1,4 +1,6 @@
-import styled from 'styled-components';
+import { useEmblaCarousel } from 'embla-carousel/react';
+import { useCallback, useEffect, useState } from 'react';
+import styled, { css } from 'styled-components';
 import { PrimaryButton } from './atoms/Button';
 
 const CatalogContainer = styled.div`
@@ -25,34 +27,45 @@ const CatalogCategories = styled.div`
   justify-content: center;
 `;
 
-const Category = styled(PrimaryButton)`
+const Category = styled(PrimaryButton)<{ selected: boolean }>`
   position: relative;
   border-radius: 4px;
   padding: 5px 20px;
+  background-color: ${props => (props.selected ? `${props.theme.accent}` : `${props.theme.foreground}`)};
+  color: ${props => (props.selected ? `${props.theme.foreground}` : `${props.theme.background}`)};
+
   transition: background 0.3s ease-in-out, color 0.3s ease-in-out border-color 0.3s ease-in-out;
 
   & ~ & {
     margin-left: 16px;
   }
 
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-style: solid;
-    border-width: 10px 8px 0 8px;
-    border-color: ${props => props.theme.accent} transparent transparent transparent;
-
-    transition: border-color 0.3s ease-in-out;
-  }
-
   &:hover {
-    &:after {
-      border-color: ${props => props.theme.foreground} transparent transparent transparent;
-    }
+    background-color: ${props => props.theme.accent};
+    color: ${props => props.theme.foreground};
   }
+
+  ${props =>
+    props.selected &&
+    css`
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-style: solid;
+        border-width: 10px 8px 0 8px;
+        border-color: ${props => props.theme.accent} transparent transparent transparent;
+
+        transition: border-color 0.3s ease-in-out;
+      }
+
+      &:hover {
+        background-color: ${props => props.theme.accent};
+        color: ${props => props.theme.foreground};
+      }
+    `}
 `;
 
 const CatalogItemContainer = styled.div`
@@ -61,7 +74,7 @@ const CatalogItemContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 400px;
+  min-width: 100%;
 `;
 
 const CatalogItemImage = styled.img`
@@ -69,37 +82,87 @@ const CatalogItemImage = styled.img`
 `;
 
 const CatalogItemButton = styled(PrimaryButton)`
+  text-decoration: none;
   margin-top: 20px;
-  width: 100%;
+  width: 400px;
 `;
 
-const CatalogItem = () => {
-  return (
-    <CatalogItemContainer>
-      <CatalogItemImage src="images/catalog_bag.png" width="400px" />
-      <CatalogItemButton>Ver Catálogo</CatalogItemButton>
-    </CatalogItemContainer>
-  );
-};
+const Categories = [
+  'Bolsas Algodón',
+  'Bolsas Papel',
+  'Sector Alimentario',
+  'Decoración',
+  'Cintas Impresas',
+  'Embalaje Decorado',
+  'Etiquetas Adhesivas',
+  'Take Away',
+  'Tendencias Etimatic',
+];
+
+const CatalogItems = [
+  { image: 'images/catalog_bag_cotton.png', catalog: './catalogs/catalog_bag_cotton.pdf' },
+  { image: 'images/catalog_bag_paper.png', catalog: './catalogs/catalog_bag_paper.pdf' },
+  { image: 'images/catalog_food.png', catalog: './catalogs/catalog_food.pdf' },
+  { image: 'images/catalog_decoration.png', catalog: './catalogs/catalog_decoration.pdf' },
+  { image: 'images/catalog_cintas.png', catalog: './catalogs/catalog_cintas.pdf' },
+  { image: 'images/catalog_boxes.png', catalog: './catalogs/catalog_boxes.pdf' },
+  { image: 'images/catalog_stickers.png', catalog: './catalogs/catalog_stickers.pdf' },
+  { image: 'images/catalog_takeaway.png', catalog: './catalogs/catalog_takeaway.pdf' },
+  { image: 'images/catalog_trends.png', catalog: './catalogs/catalog_trends.pdf' },
+];
 
 const CatalogSection = () => {
+  const [viewportRef, embla] = useEmblaCarousel({ skipSnaps: false });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const scrollTo = useCallback(
+    index => {
+      setSelectedIndex(index);
+      embla && embla.scrollTo(index);
+    },
+    [embla]
+  );
+
+  const onSelect = useCallback(() => {
+    if (!embla) return;
+    setSelectedIndex(embla.selectedScrollSnap());
+  }, [embla, setSelectedIndex]);
+
+  useEffect(() => {
+    if (!embla) return;
+    onSelect();
+    embla.on('select', onSelect);
+  }, [embla, onSelect]);
+
   return (
     <CatalogContainer>
       <CatalogTitle>NUESTRO PRODUCTO</CatalogTitle>
+
       <CatalogCategories>
-        <Category>Bolsas algodón</Category>
-        <Category>Bolsas papel</Category>
-        <Category>Sector alimentario</Category>
-        <Category>Decoración</Category>
-        <Category>Cintas Impresas</Category>
-        <Category>Embalaje decorado </Category>
-        <Category>Etiquetas adhesivas </Category>
-        <Category>Take Away </Category>
-        <Category>Tendencias etimatic </Category>
+        {Categories.map((c, index) => (
+          <Category key={index} selected={selectedIndex === index} onClick={() => scrollTo(index)}>
+            {c}
+          </Category>
+        ))}
       </CatalogCategories>
-      <CatalogsRow>
-        <CatalogItem />
-      </CatalogsRow>
+      <div
+        ref={viewportRef}
+        css={css`
+          overflow: hidden;
+          width: 100%;
+        `}
+      >
+        <CatalogsRow>
+          {CatalogItems.map(({ image, catalog }) => (
+            <CatalogItemContainer key={0}>
+              <CatalogItemImage src={image} width="400px" />
+              <CatalogItemButton as="a" href={catalog} target="_blank">
+                Ver Catálogo
+              </CatalogItemButton>
+            </CatalogItemContainer>
+          ))}
+        </CatalogsRow>
+      </div>
     </CatalogContainer>
   );
 };
