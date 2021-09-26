@@ -1,4 +1,7 @@
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import Modal from '../hooks/useModal';
+import ContactUsForm from './ContactUsForm';
 import Logo from './Logo';
 
 const HeaderContainer = styled.header`
@@ -10,10 +13,11 @@ const HeaderContainer = styled.header`
 `;
 
 const MenuLink = styled.a`
-  //margin-right: 30px;
+  text-decoration: none;
   font-weight: 600;
   font-size: 18px;
   line-height: 22px;
+  color: ${props => props.theme.foreground};
 
   & + & {
     margin-left: 30px;
@@ -21,14 +25,19 @@ const MenuLink = styled.a`
 `;
 
 const Header = () => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <HeaderContainer>
       <Logo width="180px" height="80px" />
       <div>
-        <MenuLink>PRODUCTOS</MenuLink>
-        <MenuLink>QUIENES SOMOS </MenuLink>
-        <MenuLink>CONTACTANOS</MenuLink>
+        <MenuLink href="#products">PRODUCTOS</MenuLink>
+        <MenuLink href="#aboutus">QUIENES SOMOS </MenuLink>
+        <MenuLink onClick={() => setShowModal(true)}>CONTACTANOS</MenuLink>
       </div>
+      <Modal onClose={() => setShowModal(false)} show={showModal}>
+        <ContactUsForm />
+      </Modal>
     </HeaderContainer>
   );
 };

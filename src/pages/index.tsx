@@ -2,7 +2,7 @@ import Head from 'next/head';
 import AboutUsSection from '../components/AboutUsSection';
 import BoxSection from '../components/BoxSection';
 import CatalogSection from '../components/CatalogSection';
-import ContactUsButton from '../components/ContactUsButton';
+import ContactUs from '../components/ContactUsButton';
 import Footer from '../components/Footer';
 import Hero from '../components/Hero';
 
@@ -14,10 +14,14 @@ export const Home = () => (
     </Head>
     <Hero />
     <BoxSection />
-    <CatalogSection />
-    <AboutUsSection />
+    <section id="products">
+      <CatalogSection />
+    </section>
+    <section id="aboutus">
+      <AboutUsSection />
+    </section>
     <Footer />
-    <ContactUsButton />
+    <ContactUs />
   </>
 );
 

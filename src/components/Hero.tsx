@@ -1,17 +1,8 @@
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import Modal from '../hooks/useModal';
 import { PrimaryButton } from './atoms/Button';
-
-const findScrollableParent = node => {
-  if (node == null) {
-    return null;
-  }
-
-  if (node.scrollHeight > node.clientHeight) {
-    return node;
-  } else {
-    return findScrollableParent(node.parentNode);
-  }
-};
+import ContactUsForm from './ContactUsForm';
 
 const HeroContainer = styled.div`
   position: relative;
@@ -50,11 +41,16 @@ const CTA = styled(PrimaryButton)`
 `;
 
 const Hero = () => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <HeroContainer>
       <TextContainer />
       <BagImage />
-      <CTA>Necesito Packaging</CTA>
+      <CTA onClick={() => setShowModal(true)}>Necesito Packaging</CTA>
+      <Modal onClose={() => setShowModal(false)} show={showModal}>
+        <ContactUsForm />
+      </Modal>
     </HeroContainer>
   );
 };

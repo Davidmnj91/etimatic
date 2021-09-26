@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Logo from './Logo';
 
 const Footer = () => {
@@ -26,12 +26,57 @@ const Footer = () => {
     <Footer>
       <Column>
         <Logo fill="#fff" width="180px" height="80px" />
-        <Text>C/ Lepanto 71, Bajo. 30510</Text>
-        <Text>Yecla - Murcia</Text>
+        <a
+          css={css`
+            color: ${props => props.theme.background};
+            text-decoration: none;
+            margin-top: 2em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          `}
+          href="https://www.google.com/maps/dir/?api=1&destination=Etimatic+Packaging"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span>C/ Lepanto 71, Bajo. 30510</span>
+          <span>Yecla - Murcia</span>
+        </a>
         <br />
-        <Text>info@etimatic.com</Text>
+        <Text>
+          <a
+            css={css`
+              text-decoration: none;
+              margin-top: 2em;
+              color: ${props => props.theme.background};
+            `}
+            href="mailto:info@etimatic.com"
+          >
+            info@etimatic.com
+          </a>
+        </Text>
         <br />
-        <Text>615 599 194 / 615 599 191</Text>
+        <Text>
+          <a
+            css={css`
+              text-decoration: none;
+              color: ${props => props.theme.background};
+            `}
+            href="tel:+34-615-599-194"
+          >
+            615 599 194
+          </a>
+          <span> / </span>
+          <a
+            css={css`
+              text-decoration: none;
+              color: ${props => props.theme.background};
+            `}
+            href="tel:+34-615-599-191"
+          >
+            615 599 191
+          </a>
+        </Text>
       </Column>
     </Footer>
   );

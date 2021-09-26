@@ -1,4 +1,7 @@
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import Modal from '../hooks/useModal';
+import ContactUsForm from './ContactUsForm';
 
 const ContactUsButton = styled.div`
   background-image: url('images/contact_us.png');
@@ -13,4 +16,17 @@ const ContactUsButton = styled.div`
   bottom: 3em;
 `;
 
-export default ContactUsButton;
+const ContactUs = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  return (
+    <>
+      <ContactUsButton onClick={() => setShowModal(true)} />
+      <Modal onClose={() => setShowModal(false)} show={showModal}>
+        <ContactUsForm />
+      </Modal>
+    </>
+  );
+};
+
+export default ContactUs;

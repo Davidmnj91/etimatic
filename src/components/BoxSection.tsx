@@ -1,7 +1,9 @@
 import { useEmblaCarousel } from 'embla-carousel/react';
-import { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
+import Modal from '../hooks/useModal';
 import { PrimaryButton } from './atoms/Button';
+import ContactUsForm from './ContactUsForm';
 
 const BoxContainer = styled.div`
   position: relative;
@@ -11,36 +13,11 @@ const BoxContainer = styled.div`
   height: 70vh;
 `;
 
-const BoxImage = styled.div<{ src: string }>`
-  position: absolute;
-  right: 2em;
-  height: 100%;
-  width: 55%;
-  top: 0;
-  background-image: url(${props => props.src});
-  background-size: contain;
-  background-repeat: no-repeat;
-`;
-
-const TextContainer = styled.div`
-  position: absolute;
-  left: 5em;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: flex-start;
-  height: 100%;
-`;
-
 const BoxContainerText = styled.div`
   font-weight: 600;
   font-size: 64px;
   color: ${props => props.theme.foreground};
   margin-bottom: 5rem;
-`;
-
-const MoreInfoButton = styled(PrimaryButton)`
-  bottom: 15em;
 `;
 
 const Dots = styled.div`
@@ -70,6 +47,8 @@ const boxCarouselItems = [
 ];
 
 const BoxSection = () => {
+  const [showModal, setShowModal] = useState(false);
+
   const [viewportRef, embla] = useEmblaCarousel({ skipSnaps: false });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState([]);
@@ -124,7 +103,7 @@ const BoxSection = () => {
                 `}
               >
                 <BoxContainerText>{title}</BoxContainerText>
-                <PrimaryButton>Quiero más información</PrimaryButton>
+                <PrimaryButton onClick={() => setShowModal(true)}>Quiero más información</PrimaryButton>
               </div>
               <div
                 css={css`
@@ -148,6 +127,9 @@ const BoxSection = () => {
           <Dot key={index} selected={index === selectedIndex} onClick={() => scrollTo(index)} />
         ))}
       </Dots>
+      <Modal onClose={() => setShowModal(false)} show={showModal}>
+        <ContactUsForm />
+      </Modal>
     </BoxContainer>
   );
 };
