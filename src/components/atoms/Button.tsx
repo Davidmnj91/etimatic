@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const PrimaryButton = styled.button`
   background: ${props => props.theme.accent};
+  border-radius: 4px;
   padding: 16px 48px;
   box-shadow: none;
 

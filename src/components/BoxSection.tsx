@@ -1,5 +1,5 @@
 import { useEmblaCarousel } from 'embla-carousel/react';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import Modal from '../hooks/useModal';
 import { PrimaryButton } from './atoms/Button';
