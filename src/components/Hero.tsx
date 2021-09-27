@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import Modal from '../hooks/useModal';
 import { PrimaryButton } from './atoms/Button';
 import ContactUsForm from './ContactUsForm';
+import Modal from './Modal';
 
 const HeroContainer = styled.div`
   position: relative;

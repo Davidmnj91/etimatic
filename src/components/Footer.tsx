@@ -1,29 +1,32 @@
 import styled, { css } from 'styled-components';
+import { useConstants } from '../providers/constants';
 import Logo from './Logo';
 
+const FooterContainer = styled.div`
+  width: 100%;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  padding: 12px 0px 24px;
+`;
+
+const Column = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+const Text = styled.div`
+  color: ${props => props.theme.background};
+  font-size: 16px;
+`;
+
 const Footer = () => {
-  const Footer = styled.div`
-    width: 100%;
-    background-color: #000;
-    display: flex;
-    justify-content: center;
-    padding: 12px 0px 24px;
-  `;
-
-  const Column = styled.div`
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-around;
-    align-items: center;
-  `;
-
-  const Text = styled.div`
-    color: ${props => props.theme.background};
-    font-size: 16px;
-  `;
+  const { mail, location, phones } = useConstants();
 
   return (
-    <Footer>
+    <FooterContainer>
       <Column>
         <Logo fill="#fff" width="180px" height="80px" />
         <a
@@ -35,12 +38,12 @@ const Footer = () => {
             flex-direction: column;
             align-items: center;
           `}
-          href="https://www.google.com/maps/dir/?api=1&destination=Etimatic+Packaging"
+          href={location.mapsUrl}
           target="_blank"
           rel="noreferrer"
         >
-          <span>C/ Lepanto 71, Bajo. 30510</span>
-          <span>Yecla - Murcia</span>
+          <span>{location.address}</span>
+          <span>{location.city}</span>
         </a>
         <br />
         <Text>
@@ -50,35 +53,30 @@ const Footer = () => {
               margin-top: 2em;
               color: ${props => props.theme.background};
             `}
-            href="mailto:info@etimatic.com"
+            href={`mailto:${mail}`}
           >
-            info@etimatic.com
+            {mail}
           </a>
         </Text>
         <br />
         <Text>
-          <a
-            css={css`
-              text-decoration: none;
-              color: ${props => props.theme.background};
-            `}
-            href="tel:+34-615-599-194"
-          >
-            615 599 194
-          </a>
-          <span> / </span>
-          <a
-            css={css`
-              text-decoration: none;
-              color: ${props => props.theme.background};
-            `}
-            href="tel:+34-615-599-191"
-          >
-            615 599 191
-          </a>
+          {phones.map(({ display, callNumber }, index, arr) => (
+            <>
+              <a
+                css={css`
+                  text-decoration: none;
+                  color: ${props => props.theme.background};
+                `}
+                href={`tel:${callNumber}`}
+              >
+                {display}
+              </a>
+              {arr.length - 1 !== index && <> / </>}
+            </>
+          ))}
         </Text>
       </Column>
-    </Footer>
+    </FooterContainer>
   );
 };
 

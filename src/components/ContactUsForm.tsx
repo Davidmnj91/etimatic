@@ -1,8 +1,10 @@
 import { css } from 'styled-components';
+import { useConstants } from '../providers/constants';
 import { PrimaryButton } from './atoms/Button';
 import { Input, TextArea } from './atoms/Input';
 
 const ContactUsForm = () => {
+  const { mail, location, phones } = useConstants();
   return (
     <div
       css={css`
@@ -44,13 +46,13 @@ const ContactUsForm = () => {
               text-decoration: none;
               margin-top: 2em;
             `}
-            href="https://www.google.com/maps/dir/?api=1&destination=Etimatic+Packaging"
+            href={location.mapsUrl}
             target="_blank"
             rel="noreferrer"
           >
-            C/ Lepanto 71, Bajo. 30510
+            {location.address}
             <br />
-            Yecla - Murcia
+            {location.city}
           </a>
           <a
             css={css`
@@ -58,9 +60,9 @@ const ContactUsForm = () => {
               margin-top: 2em;
               color: ${props => props.theme.background};
             `}
-            href="mailto:info@etimatic.com"
+            href={`mailto:${mail}`}
           >
-            info@etimatic.com
+            {mail}
           </a>
           <div
             css={css`
@@ -69,25 +71,18 @@ const ContactUsForm = () => {
               flex-direction: column;
             `}
           >
-            <a
-              css={css`
-                text-decoration: none;
-                color: ${props => props.theme.accent};
-              `}
-              href="tel:+34-615-599-194"
-            >
-              615 599 194
-            </a>
-
-            <a
-              css={css`
-                text-decoration: none;
-                color: ${props => props.theme.accent};
-              `}
-              href="tel:+34-615-599-191"
-            >
-              615 599 191
-            </a>
+            {phones.map(({ display, callNumber }) => (
+              <a
+                key={display}
+                css={css`
+                  text-decoration: none;
+                  color: ${props => props.theme.accent};
+                `}
+                href={`tel:${callNumber}`}
+              >
+                {display}
+              </a>
+            ))}
           </div>
         </div>
       </div>
@@ -99,7 +94,7 @@ const ContactUsForm = () => {
         `}
       >
         <form
-          action="mailto:info@etimatic.com"
+          action={`mailto:${mail}`}
           method="POST"
           encType="multipart/form-data"
           name="Contactanos"
@@ -134,9 +129,9 @@ const ContactUsForm = () => {
                 text-decoration: none;
                 color: ${props => props.theme.foreground};
               `}
-              href="mailto:info@etimatic.com"
+              href={`mailto:${mail}`}
             >
-              info@etimatic.com
+              {mail}
             </a>
             <PrimaryButton
               css={css`

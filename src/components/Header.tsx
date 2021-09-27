@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import Modal from '../hooks/useModal';
 import ContactUsForm from './ContactUsForm';
 import Logo from './Logo';
+import Modal from './Modal';
 
 const HeaderContainer = styled.header`
   display: flex;

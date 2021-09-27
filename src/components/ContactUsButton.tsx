@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import Modal from '../hooks/useModal';
 import ContactUsForm from './ContactUsForm';
+import Modal from './Modal';
 
 const ContactUsButton = styled.div`
   background-image: url('images/contact_us.png');

@@ -1,9 +1,9 @@
 import { useEmblaCarousel } from 'embla-carousel/react';
 import { useCallback, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-import Modal from '../hooks/useModal';
 import { PrimaryButton } from './atoms/Button';
 import ContactUsForm from './ContactUsForm';
+import Modal from './Modal';
 
 const BoxContainer = styled.div`
   position: relative;

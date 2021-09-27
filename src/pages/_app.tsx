@@ -1,5 +1,6 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import MainLayout from '../components/MainLayout';
+import { ConstantsProvider } from '../providers/constants';
 import { lightTheme } from '../themes';
 import '../themes/global-style.css';
 
@@ -21,9 +22,11 @@ export default function App({ Component, pageProps }: any) {
     <>
       <GlobalStyle />
       <ThemeProvider theme={lightTheme}>
-        <MainLayout>
-          <Component {...pageProps} />
-        </MainLayout>
+        <ConstantsProvider>
+          <MainLayout>
+            <Component {...pageProps} />
+          </MainLayout>
+        </ConstantsProvider>
       </ThemeProvider>
     </>
   );
