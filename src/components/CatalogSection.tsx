@@ -88,15 +88,16 @@ const CatalogItemButton = styled(PrimaryButton)`
 `;
 
 const Categories = [
-  'Bolsas Algodón',
+  'Bolsas Algodón y TNT',
   'Bolsas Papel',
   'Sector Alimentario',
   'Decoración',
-  'Cintas Impresas',
+  'Cintas Decorativas e Impresas',
   'Embalaje Decorado',
   'Etiquetas Adhesivas',
   'Take Away',
   'Tendencias Etimatic',
+  'Papel Regalo',
 ];
 
 const CatalogItems = [

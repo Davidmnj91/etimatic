@@ -21,11 +21,11 @@ const AboutUsTitle = styled.h3`
 
 const AboutUsContent = styled.span`
   margin-left: 5em;
-  font-size: 36px;
+  font-size: 20px;
   color: ${props => props.theme.background};
   flex: 0 0 60%;
   word-break: break-word;
-  line-height: 48px;
+  line-height: 30px;
 `;
 
 const AboutUsSection = () => {
