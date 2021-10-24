@@ -36,7 +36,7 @@ const Dot = styled(PrimaryButton)<{ selected: boolean }>`
   border-radius: 50%;
 
   & + & {
-    margin-left: 8px;
+    margin-left: 16px;
   }
 `;
 
