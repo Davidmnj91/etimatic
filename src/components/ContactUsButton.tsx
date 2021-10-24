@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import ContactUsForm from './ContactUsForm';
 import Modal from './Modal';
 
@@ -14,6 +14,15 @@ const ContactUsButton = styled.div`
   position: absolute;
   right: 3em;
   bottom: 3em;
+
+  ${props =>
+    props.theme.mixins.mediaquery(
+      'Slim',
+      css`
+        right: 1em;
+        bottom: 1em;
+      `
+    )}
 `;
 
 const ContactUs = () => {

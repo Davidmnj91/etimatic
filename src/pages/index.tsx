@@ -17,7 +17,7 @@ export const Home = () => (
     <section id="products">
       <CatalogSection />
     </section>
-    <section id="aboutus">
+    <section id="about_us">
       <AboutUsSection />
     </section>
     <Footer />

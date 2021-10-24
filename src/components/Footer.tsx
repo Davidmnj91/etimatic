@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { useConstants } from '../providers/constants';
-import Logo from './Logo';
+import Logo from './svgs/Logo';
 
 const FooterContainer = styled.div`
   width: 100%;

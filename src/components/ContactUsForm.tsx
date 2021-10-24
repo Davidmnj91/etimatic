@@ -1,29 +1,87 @@
-import { css } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useConstants } from '../providers/constants';
 import { PrimaryButton } from './atoms/Button';
 import { Input, TextArea } from './atoms/Input';
 
+const ContactUsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  ${props =>
+    props.theme.mixins.mediaquery(
+      'Slim',
+      css`
+        flex-direction: column;
+      `
+    )}
+`;
+
+const ContactUsHeader = styled.div`
+  flex: 0 0 50%;
+  padding: 5em;
+  background-color: ${props => props.theme.foreground};
+
+  ${props =>
+    props.theme.mixins.mediaquery(
+      'Slim',
+      css`
+        flex: 1 0 50%;
+        justify-content: center;
+        padding: 4em 2em 2em;
+      `
+    )}
+`;
+
+const ContactUsBody = styled.div`
+  flex: 0 0 50%;
+  padding: 5em;
+  background-color: ${props => props.theme.background};
+
+  ${props =>
+    props.theme.mixins.mediaquery(
+      'Slim',
+      css`
+        flex: 1 0 50%;
+        justify-content: center;
+        padding: 2em 1em 1em;
+      `
+    )}
+`;
+
+const ContactUsLink = styled.a`
+  color: ${props => props.theme.background};
+  text-decoration: none;
+  margin-top: 2em;
+
+  ${props =>
+    props.theme.mixins.mediaquery(
+      'Slim',
+      css`
+        margin-top: 1em;
+        text-align: center;
+      `
+    )}
+`;
+
 const ContactUsForm = () => {
   const { mail, location, phones } = useConstants();
   return (
-    <div
-      css={css`
-        display: flex;
-        flex-direction: row;
-      `}
-    >
-      <div
-        css={css`
-          flex: 0 0 50%;
-          padding: 5em;
-          background-color: ${props => props.theme.foreground};
-        `}
-      >
+    <ContactUsContainer>
+      <ContactUsHeader>
         <h2
           css={css`
             color: ${props => props.theme.accent};
             font-weight: 600;
             font-size: 48px;
+
+            ${props =>
+              props.theme.mixins.mediaquery(
+                'Slim',
+                css`
+                  text-align: center;
+                  font-size: 32px;
+                `
+              )}
           `}
         >
           CONTACTA CON NOSOTROS
@@ -38,37 +96,40 @@ const ContactUsForm = () => {
             display: flex;
             flex-direction: column;
             color: ${props => props.theme.background};
+
+            ${props =>
+              props.theme.mixins.mediaquery(
+                'Slim',
+                css`
+                  margin-top: 20px;
+                  justify-content: center;
+                  font-size: 16px;
+                  font-weight: 700;
+                  line-height: 19px;
+                `
+              )}
           `}
         >
-          <a
-            css={css`
-              color: ${props => props.theme.background};
-              text-decoration: none;
-              margin-top: 2em;
-            `}
-            href={location.mapsUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
+          <ContactUsLink href={location.mapsUrl} target="_blank" rel="noreferrer">
             {location.address}
             <br />
             {location.city}
-          </a>
-          <a
-            css={css`
-              text-decoration: none;
-              margin-top: 2em;
-              color: ${props => props.theme.background};
-            `}
-            href={`mailto:${mail}`}
-          >
-            {mail}
-          </a>
+          </ContactUsLink>
+          <ContactUsLink href={`mailto:${mail}`}>{mail}</ContactUsLink>
           <div
             css={css`
               margin-top: 2em;
               display: flex;
               flex-direction: column;
+
+              ${props =>
+                props.theme.mixins.mediaquery(
+                  'Slim',
+                  css`
+                    margin-top: 1em;
+                    justify-content: center;
+                  `
+                )}
             `}
           >
             {phones.map(({ display, callNumber }) => (
@@ -77,6 +138,14 @@ const ContactUsForm = () => {
                 css={css`
                   text-decoration: none;
                   color: ${props => props.theme.accent};
+
+                  ${props =>
+                    props.theme.mixins.mediaquery(
+                      'Slim',
+                      css`
+                        text-align: center;
+                      `
+                    )}
                 `}
                 href={`tel:${callNumber}`}
               >
@@ -85,14 +154,8 @@ const ContactUsForm = () => {
             ))}
           </div>
         </div>
-      </div>
-      <div
-        css={css`
-          flex: 0 0 50%;
-          background-color: ${props => props.theme.background};
-          padding: 5em;
-        `}
-      >
+      </ContactUsHeader>
+      <ContactUsBody>
         <form
           action={`mailto:${mail}`}
           method="POST"
@@ -102,6 +165,14 @@ const ContactUsForm = () => {
             display: flex;
             flex-direction: column;
             grid-gap: 2em;
+
+            ${props =>
+              props.theme.mixins.mediaquery(
+                'Slim',
+                css`
+                  grid-gap: 1em;
+                `
+              )}
           `}
         >
           <h3
@@ -120,6 +191,14 @@ const ContactUsForm = () => {
             css={css`
               display: flex;
               justify-content: space-between;
+
+              ${props =>
+                props.theme.mixins.mediaquery(
+                  'Slim',
+                  css`
+                    justify-content: center;
+                  `
+                )}
             `}
           >
             <a
@@ -128,6 +207,14 @@ const ContactUsForm = () => {
                 font-size: 16px;
                 text-decoration: none;
                 color: ${props => props.theme.foreground};
+
+                ${props =>
+                  props.theme.mixins.mediaquery(
+                    'Slim',
+                    css`
+                      display: none;
+                    `
+                  )}
               `}
               href={`mailto:${mail}`}
             >
@@ -136,6 +223,14 @@ const ContactUsForm = () => {
             <PrimaryButton
               css={css`
                 min-width: 15em;
+
+                ${props =>
+                  props.theme.mixins.mediaquery(
+                    'Slim',
+                    css`
+                      width: 100%;
+                    `
+                  )}
               `}
               type="submit"
             >
@@ -143,8 +238,8 @@ const ContactUsForm = () => {
             </PrimaryButton>
           </div>
         </form>
-      </div>
-    </div>
+      </ContactUsBody>
+    </ContactUsContainer>
   );
 };
 

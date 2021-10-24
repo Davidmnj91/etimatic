@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { Constants } from '../config/Constants';
+import { Constants } from '../config/constants';
 
 type ConstantsProviderProps = {
   children: React.ReactNode;

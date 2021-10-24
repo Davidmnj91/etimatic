@@ -97,7 +97,7 @@ const BoxSection = () => {
                 css={css`
                   position: absolute;
                   width: 40%;
-                  left: 20rem;
+                  left: 5rem;
                   top: 50%;
                   transform: translateY(-50%);
                 `}
