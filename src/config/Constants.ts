@@ -5,8 +5,5 @@ export const Constants = {
     city: 'Yecla - Murcia',
     mapsUrl: 'https://www.google.com/maps/dir/?api=1&destination=Etimatic+Packaging',
   },
-  phones: [
-    { display: '615 683 951', callNumber: '+34-615-683-951' },
-    { display: '615 683 954', callNumber: '+34-615-683-954' },
-  ],
+  phones: [{ display: '968 796 550', callNumber: '+34-968-796-550' }],
 };

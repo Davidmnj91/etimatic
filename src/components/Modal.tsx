@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import styled, { css } from 'styled-components';
 import { FadeInAnimation } from './atoms/animations';

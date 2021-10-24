@@ -41,9 +41,9 @@ const Dot = styled(PrimaryButton)<{ selected: boolean }>`
 `;
 
 const boxCarouselItems = [
-  { title: 'Packaging personalizado 100% a tus necesidades', boxImage: 'images/box_closed.png' },
-  { title: 'La calidad de siempre', boxImage: 'images/box_opening.png' },
-  { title: 'El mismo servicio', boxImage: 'images/box_open.png' },
+  { title: 'PACKAGING 100% A TUS NECESIDADES', boxImage: 'images/box_closed.png' },
+  { title: 'LA CALIDAD DE SIEMPRE', boxImage: 'images/box_opening.png' },
+  { title: 'EL MISMO SERVICIO', boxImage: 'images/box_open.png' },
 ];
 
 const BoxSection = () => {
