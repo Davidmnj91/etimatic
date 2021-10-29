@@ -16,8 +16,8 @@ const ContactUsButton = styled.div`
   bottom: 3em;
 
   ${props =>
-    props.theme.mixins.mediaquery(
-      'Slim',
+    props.theme.mediaquery(
+      'SLIM',
       css`
         right: 1em;
         bottom: 1em;

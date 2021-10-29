@@ -39,9 +39,9 @@ const ProductTile = ({ name, startingPrice, shortDescription, imageUrl, isFavori
   const ShopButton = styled.button`
     cursor: pointer;
     background-color: transparent;
-    color: ${props => props.theme.foreground};
+    color: ${props => props.theme.palettes.FOREGROUND.main};
     outline: none;
-    border-color: ${props => props.theme.foreground};
+    border-color: ${props => props.theme.palettes.FOREGROUND.main};
     padding: 5px 15px;
     margin-top: 5px;
   `;

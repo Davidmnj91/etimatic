@@ -1,15 +1,17 @@
 import styled, { css } from 'styled-components';
 import { useConstants } from '../providers/constants';
 import { PrimaryButton } from './atoms/Button';
+import { Flex } from './atoms/Container';
 import { Input, TextArea } from './atoms/Input';
+import { Text } from './atoms/Text';
 
 const ContactUsContainer = styled.div`
   display: flex;
   flex-direction: row;
 
   ${props =>
-    props.theme.mixins.mediaquery(
-      'Slim',
+    props.theme.mediaquery(
+      'SLIM',
       css`
         flex-direction: column;
       `
@@ -19,11 +21,11 @@ const ContactUsContainer = styled.div`
 const ContactUsHeader = styled.div`
   flex: 0 0 50%;
   padding: 5em;
-  background-color: ${props => props.theme.foreground};
+  background-color: ${props => props.theme.palettes.FOREGROUND.main};
 
   ${props =>
-    props.theme.mixins.mediaquery(
-      'Slim',
+    props.theme.mediaquery(
+      'SLIM',
       css`
         flex: 1 0 50%;
         justify-content: center;
@@ -35,11 +37,11 @@ const ContactUsHeader = styled.div`
 const ContactUsBody = styled.div`
   flex: 0 0 50%;
   padding: 5em;
-  background-color: ${props => props.theme.background};
+  background-color: ${props => props.theme.palettes.BASE.main};
 
   ${props =>
-    props.theme.mixins.mediaquery(
-      'Slim',
+    props.theme.mediaquery(
+      'SLIM',
       css`
         flex: 1 0 50%;
         justify-content: center;
@@ -49,13 +51,13 @@ const ContactUsBody = styled.div`
 `;
 
 const ContactUsLink = styled.a`
-  color: ${props => props.theme.background};
+  color: ${props => props.theme.palettes.BASE.main};
   text-decoration: none;
   margin-top: 2em;
 
   ${props =>
-    props.theme.mixins.mediaquery(
-      'Slim',
+    props.theme.mediaquery(
+      'SLIM',
       css`
         margin-top: 1em;
         text-align: center;
@@ -68,46 +70,16 @@ const ContactUsForm = () => {
   return (
     <ContactUsContainer>
       <ContactUsHeader>
-        <h2
-          css={css`
-            color: ${props => props.theme.accent};
-            font-weight: 600;
-            font-size: 48px;
-
-            ${props =>
-              props.theme.mixins.mediaquery(
-                'Slim',
-                css`
-                  text-align: center;
-                  font-size: 32px;
-                `
-              )}
-          `}
-        >
+        <Text font="HEADING2" palette="ACCENT">
           CONTACTA CON NOSOTROS
-        </h2>
+        </Text>
 
-        <div
+        <Flex
+          palette="BASE"
+          font="BODY"
+          direction="column"
           css={css`
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 19px;
             margin-top: 10em;
-            display: flex;
-            flex-direction: column;
-            color: ${props => props.theme.background};
-
-            ${props =>
-              props.theme.mixins.mediaquery(
-                'Slim',
-                css`
-                  margin-top: 20px;
-                  justify-content: center;
-                  font-size: 16px;
-                  font-weight: 700;
-                  line-height: 19px;
-                `
-              )}
           `}
         >
           <ContactUsLink href={location.mapsUrl} target="_blank" rel="noreferrer">
@@ -116,15 +88,14 @@ const ContactUsForm = () => {
             {location.city}
           </ContactUsLink>
           <ContactUsLink href={`mailto:${mail}`}>{mail}</ContactUsLink>
-          <div
+          <Flex
+            direction="column"
             css={css`
               margin-top: 2em;
-              display: flex;
-              flex-direction: column;
 
               ${props =>
-                props.theme.mixins.mediaquery(
-                  'Slim',
+                props.theme.mediaquery(
+                  'SLIM',
                   css`
                     margin-top: 1em;
                     justify-content: center;
@@ -133,15 +104,17 @@ const ContactUsForm = () => {
             `}
           >
             {phones.map(({ display, callNumber }) => (
-              <a
+              <Text
+                as="a"
+                font="BODY"
+                palette="ACCENT"
                 key={display}
                 css={css`
                   text-decoration: none;
-                  color: ${props => props.theme.accent};
 
                   ${props =>
-                    props.theme.mixins.mediaquery(
-                      'Slim',
+                    props.theme.mediaquery(
+                      'SLIM',
                       css`
                         text-align: center;
                       `
@@ -150,67 +123,60 @@ const ContactUsForm = () => {
                 href={`tel:${callNumber}`}
               >
                 {display}
-              </a>
+              </Text>
             ))}
-          </div>
-        </div>
+          </Flex>
+        </Flex>
       </ContactUsHeader>
       <ContactUsBody>
-        <form
+        <Flex
+          as="form"
+          direction="column"
           action={`mailto:${mail}`}
           method="POST"
           encType="multipart/form-data"
           name="Contactanos"
           css={css`
-            display: flex;
-            flex-direction: column;
             grid-gap: 2em;
 
             ${props =>
-              props.theme.mixins.mediaquery(
-                'Slim',
+              props.theme.mediaquery(
+                'SLIM',
                 css`
                   grid-gap: 1em;
                 `
               )}
           `}
         >
-          <h3
-            css={css`
-              font-weight: 600;
-              font-size: 48px;
-            `}
-          >
+          <Text palette="BASE" font="HEADING2">
             FORMULARIO
-          </h3>
-          <Input type="text" placeholder="Nombre*" />
-          <Input type="mail" placeholder="Mail*" />
-          <TextArea placeholder="Tu mensaje" />
+          </Text>
+          <Input palette="ACCENT" font="BODY" type="text" placeholder="Nombre*" />
+          <Input palette="ACCENT" font="BODY" type="mail" placeholder="Mail*" />
+          <TextArea palette="ACCENT" font="BODY" placeholder="Tu mensaje" />
 
-          <div
+          <Flex
+            justifyContent="space-between"
             css={css`
-              display: flex;
-              justify-content: space-between;
-
               ${props =>
-                props.theme.mixins.mediaquery(
-                  'Slim',
+                props.theme.mediaquery(
+                  'SLIM',
                   css`
                     justify-content: center;
                   `
                 )}
             `}
           >
-            <a
+            <Text
+              as="a"
+              font="BODY"
+              palette="FOREGROUND"
               css={css`
-                font-weight: 700;
-                font-size: 16px;
                 text-decoration: none;
-                color: ${props => props.theme.foreground};
 
                 ${props =>
-                  props.theme.mixins.mediaquery(
-                    'Slim',
+                  props.theme.mediaquery(
+                    'SLIM',
                     css`
                       display: none;
                     `
@@ -219,14 +185,15 @@ const ContactUsForm = () => {
               href={`mailto:${mail}`}
             >
               {mail}
-            </a>
+            </Text>
             <PrimaryButton
+              palette="ACCENT"
               css={css`
                 min-width: 15em;
 
                 ${props =>
-                  props.theme.mixins.mediaquery(
-                    'Slim',
+                  props.theme.mediaquery(
+                    'SLIM',
                     css`
                       width: 100%;
                     `
@@ -236,8 +203,8 @@ const ContactUsForm = () => {
             >
               Enviar
             </PrimaryButton>
-          </div>
-        </form>
+          </Flex>
+        </Flex>
       </ContactUsBody>
     </ContactUsContainer>
   );

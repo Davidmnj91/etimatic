@@ -54,8 +54,8 @@ const StyledModalHeader = styled.div`
   top: 1em;
 
   ${props =>
-    props.theme.mixins.mediaquery(
-      'Slim',
+    props.theme.mediaquery(
+      'SLIM',
       css`
         top: 12px;
         right: 12px;
@@ -85,13 +85,13 @@ const StyledModalOverlay = styled.div`
 `;
 
 const CloseButton = styled(CloseIcon)`
-  fill: ${props => props.theme.foreground};
+  fill: ${props => props.theme.palettes.FOREGROUND.main};
 
   ${props =>
-    props.theme.mixins.mediaquery(
-      'Slim',
+    props.theme.mediaquery(
+      'SLIM',
       css`
-        fill: ${props => props.theme.background};
+        fill: ${props => props.theme.palettes.BASE.main};
       `
     )}
 `;
