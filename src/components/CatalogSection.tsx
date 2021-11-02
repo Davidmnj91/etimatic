@@ -19,7 +19,7 @@ const CatalogsRow = styled.div`
 const CatalogTitle = styled.h2`
   font-weight: 900;
   font-size: 64px;
-  color: ${props => props.theme.palettes.FOREGROUND.main};
+  color: ${props => props.theme.palettes.MAIN};
 `;
 
 const CatalogCategories = styled.div`
@@ -31,9 +31,8 @@ const Category = styled(PrimaryButton)<{ selected: boolean }>`
   position: relative;
   border-radius: 4px;
   padding: 5px 20px;
-  background-color: ${props =>
-    props.selected ? `${props.theme.palettes.ACCENT.main}` : `${props.theme.palettes.FOREGROUND.main}`};
-  color: ${props => (props.selected ? `${props.theme.palettes.FOREGROUND.main}` : `${props.theme.palettes.BASE.main}`)};
+  background-color: ${props => (props.selected ? `${props.theme.palettes.ACCENT}` : `${props.theme.palettes.MAIN}`)};
+  color: ${props => (props.selected ? `${props.theme.palettes.MAIN}` : `${props.theme.palettes.WHITE}`)};
 
   transition: background 0.3s ease-in-out, color 0.3s ease-in-out border-color 0.3s ease-in-out;
 
@@ -42,8 +41,8 @@ const Category = styled(PrimaryButton)<{ selected: boolean }>`
   }
 
   &:hover {
-    background-color: ${props => props.theme.palettes.ACCENT.main};
-    color: ${props => props.theme.palettes.FOREGROUND.main};
+    background-color: ${props => props.theme.palettes.ACCENT};
+    color: ${props => props.theme.palettes.MAIN};
   }
 
   ${props =>
@@ -57,14 +56,14 @@ const Category = styled(PrimaryButton)<{ selected: boolean }>`
         transform: translateX(-50%);
         border-style: solid;
         border-width: 10px 8px 0 8px;
-        border-color: ${props => props.theme.palettes.ACCENT.main} transparent transparent transparent;
+        border-color: ${props => props.theme.palettes.ACCENT} transparent transparent transparent;
 
         transition: border-color 0.3s ease-in-out;
       }
 
       &:hover {
-        background-color: ${props => props.theme.palettes.ACCENT.main};
-        color: ${props => props.theme.palettes.FOREGROUND.main};
+        background-color: ${props => props.theme.palettes.ACCENT};
+        color: ${props => props.theme.palettes.MAIN};
       }
     `}
 `;
@@ -98,7 +97,7 @@ const Categories = [
   'Etiquetas Adhesivas',
   'Take Away',
   'Tendencias Etimatic',
-  'Papel Regalo',
+  // 'Papel Regalo',
 ];
 
 const CatalogItems = [
@@ -142,7 +141,7 @@ const CatalogSection = () => {
 
       <CatalogCategories>
         {Categories.map((c, index) => (
-          <Category key={index} palette="BASE" selected={selectedIndex === index} onClick={() => scrollTo(index)}>
+          <Category key={index} selected={selectedIndex === index} onClick={() => scrollTo(index)}>
             {c}
           </Category>
         ))}
@@ -158,7 +157,7 @@ const CatalogSection = () => {
           {CatalogItems.map(({ image, catalog }) => (
             <CatalogItemContainer key={0}>
               <CatalogItemImage src={image} width="400px" />
-              <CatalogItemButton as="a" palette="ACCENT" href={catalog} target="_blank">
+              <CatalogItemButton as="a" href={catalog} target="_blank">
                 Ver Catálogo
               </CatalogItemButton>
             </CatalogItemContainer>

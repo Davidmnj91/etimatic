@@ -53,7 +53,7 @@ const MobileMenu = styled.button`
 `;
 
 const MobileMenuContainer = styled.div<{ show: boolean }>`
-  background-color: ${props => props.theme.palettes.BASE.main};
+  background-color: ${props => props.theme.palettes.MAIN};
   overflow-y: hidden;
   position: absolute;
   top: 80px;
@@ -80,7 +80,7 @@ const MobileMenuLink = styled.button`
   font-weight: 400;
   font-size: 20px;
   line-height: 22px;
-  color: ${props => props.theme.palettes.FOREGROUND.main};
+  color: ${props => props.theme.palettes.MAIN};
 `;
 
 const MobileMenuSeparator = styled.hr`
@@ -95,7 +95,7 @@ const MenuLink = styled.button`
   font-weight: 600;
   font-size: 18px;
   line-height: 22px;
-  color: ${props => props.theme.palettes.FOREGROUND.main};
+  color: ${props => props.theme.palettes.MAIN};
 
   & + & {
     margin-left: 30px;

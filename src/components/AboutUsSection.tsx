@@ -8,16 +8,17 @@ const AboutUsContainer = styled(Flex)`
   background-repeat: no-repeat;
   background-position: center;
 
+  grid-gap: 2em;
   padding: 15em;
 `;
 
 const AboutUsSection = () => {
   return (
     <AboutUsContainer justifyContent="center" alignItems="center">
-      <Text as="h3" font="HEADING1" palette="BASE">
+      <Text as="h3" font="HEADING1" color="WHITE">
         UNA LARGA TRAYECTORIA
       </Text>
-      <Text font="TITLE" palette="BASE">
+      <Text font="TITLE" color="WHITE">
         <b>Etimatic packaging</b> es una empresa familiar que nació en el año 1986 con la finalidad de proveer al
         comercio una amplia gama de productos de <b>packaging</b> y más tarde abriendo mercado en la industria.
         <br />

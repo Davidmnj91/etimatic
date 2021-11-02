@@ -2,19 +2,20 @@ import styled, { css } from 'styled-components';
 import { DefaultFonts, DefaultPalettes } from '../../themes';
 
 type FormFieldProps = {
-  palette: DefaultPalettes;
-  font: DefaultFonts;
+  color?: DefaultPalettes;
+  focus?: DefaultPalettes;
+  font?: DefaultFonts;
 };
 
 const commonFormFieldStyles = css<FormFieldProps>`
   padding: 1em;
-  ${props => props.theme.text(props.font)};
-  border: 2px solid ${props => props.theme.palettes[props.palette].contrastText};
+  ${({ font = 'BODY', theme }) => theme.text(font)};
+  border: 2px solid ${({ color = 'MAIN', theme }) => theme.palettes[color]};
 
   transition: border-color 0.3s ease-in-out;
 
   &:focus {
-    border-color: ${props => props.theme.palettes[props.palette].main};
+    border-color: ${({ focus = 'ACCENT', theme }) => theme.palettes[focus]};
     outline: none;
   }
 `;

@@ -85,13 +85,13 @@ const StyledModalOverlay = styled.div`
 `;
 
 const CloseButton = styled(CloseIcon)`
-  fill: ${props => props.theme.palettes.FOREGROUND.main};
+  fill: ${props => props.theme.palettes.MAIN};
 
   ${props =>
     props.theme.mediaquery(
       'SLIM',
       css`
-        fill: ${props => props.theme.palettes.BASE.main};
+        fill: ${props => props.theme.palettes.MAIN};
       `
     )}
 `;

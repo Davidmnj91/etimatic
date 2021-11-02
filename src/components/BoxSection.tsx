@@ -17,7 +17,7 @@ const BoxContainer = styled.div`
 const BoxContainerText = styled.div`
   font-weight: 600;
   font-size: 64px;
-  color: ${props => props.theme.palettes.BASE.main};
+  color: ${props => props.theme.palettes.MAIN};
   margin-bottom: 5rem;
 `;
 
@@ -33,8 +33,7 @@ const Dot = styled(PrimaryButton)<{ selected: boolean }>`
   padding: 0px;
   width: 16px;
   height: 16px;
-  background-color: ${props =>
-    props.selected ? `${props.theme.palettes.ACCENT.main}` : `${props.theme.palettes.BASE.main}`};
+  background-color: ${props => (props.selected ? `${props.theme.palettes.ACCENT}` : `${props.theme.palettes.MAIN}`)};
   border-radius: 50%;
 
   & + & {
@@ -104,9 +103,7 @@ const BoxSection = () => {
                 `}
               >
                 <BoxContainerText>{title}</BoxContainerText>
-                <PrimaryButton palette="BASE" onClick={() => setShowModal(true)}>
-                  Quiero más información
-                </PrimaryButton>
+                <PrimaryButton onClick={() => setShowModal(true)}>Quiero más información</PrimaryButton>
               </div>
               <div
                 css={css`
@@ -127,7 +124,7 @@ const BoxSection = () => {
       </div>
       <Dots>
         {scrollSnaps.map((_, index) => (
-          <Dot palette="BASE" key={index} selected={index === selectedIndex} onClick={() => scrollTo(index)} />
+          <Dot color="MAIN" key={index} selected={index === selectedIndex} onClick={() => scrollTo(index)} />
         ))}
       </Dots>
       <Modal onClose={() => setShowModal(false)} show={showModal}>

@@ -86,9 +86,7 @@ const Hero = () => {
     <HeroContainer>
       <TextContainer />
       <BagImage />
-      <CTA palette="ACCENT" onClick={() => setShowModal(true)}>
-        Necesito Packaging
-      </CTA>
+      <CTA onClick={() => setShowModal(true)}>Necesito Packaging</CTA>
       <Modal onClose={() => setShowModal(false)} show={showModal}>
         <ContactUsForm />
       </Modal>

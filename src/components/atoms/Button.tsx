@@ -1,13 +1,17 @@
 import styled from 'styled-components';
-import { DefaultPalettes } from '../../themes';
+import { DefaultFonts, DefaultPalettes } from '../../themes';
 
-export const PrimaryButton = styled.button<{ palette: DefaultPalettes }>`
-  ${props => props.theme.colour(props.palette)};
+export const PrimaryButton = styled.button<{
+  background?: DefaultPalettes;
+  color?: DefaultPalettes;
+  font?: DefaultFonts;
+}>`
+  ${({ background = 'ACCENT', color = 'MAIN', theme }) => theme.colour(background, color)};
   border-radius: 4px;
   padding: 16px 48px;
   box-shadow: none;
 
-  ${props => props.theme.text('BODY')}
+  ${({ font = 'HIGHLIGHT', theme }) => theme.text(font)}
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
@@ -20,7 +24,6 @@ export const PrimaryButton = styled.button<{ palette: DefaultPalettes }>`
   transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
 
   &:hover {
-    background: ${props => props.theme.palettes[props.palette].contrastText};
-    color: ${props => props.theme.palettes[props.palette].main};
+    ${({ background = 'MAIN', color = 'ACCENT', theme }) => theme.colour(background, color)};
   }
 `;

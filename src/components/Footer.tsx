@@ -10,16 +10,18 @@ const Footer = () => {
   return (
     <Flex
       justifyContent="center"
-      css="css`
-    background-color: #000;
-    padding: 12px 0px 24px;
-    `"
+      css={css`
+        background-color: #000;
+        padding: 12px 0px 24px;
+      `}
     >
       <Flex direction="column" wrap="nowrap" justifyContent="space-around" alignItems="center">
         <Logo fill="#fff" width="180px" height="80px" />
-        <a
+        <Text
+          font="BODY"
+          color="WHITE"
+          as="a"
           css={css`
-            color: ${props => props.theme.palettes.BASE.main};
             text-decoration: none;
             margin-top: 2em;
             display: flex;
@@ -32,11 +34,11 @@ const Footer = () => {
         >
           <span>{location.address}</span>
           <span>{location.city}</span>
-        </a>
+        </Text>
         <br />
         <Text
           font="BODY"
-          palette="BASE"
+          color="WHITE"
           as="a"
           css={css`
             text-decoration: none;
@@ -51,7 +53,7 @@ const Footer = () => {
           <>
             <Text
               font="BODY"
-              palette="BASE"
+              color="WHITE"
               as="a"
               css={css`
                 text-decoration: none;
