@@ -1,8 +1,8 @@
 import { CSSProp } from 'styled-components';
-import { CustomTheme } from './src/themes';
+import { DesignSystemTheme } from './src/themes';
 
 declare module 'styled-components' {
-  export interface DefaultTheme extends CustomTheme {} // extends the global DefaultTheme with our ThemeType.
+  export interface DefaultTheme extends DesignSystemTheme {} // extends the global DefaultTheme with our ThemeType.
 }
 
 declare module 'react' {

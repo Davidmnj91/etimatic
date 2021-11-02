@@ -2,6 +2,7 @@ import { useEmblaCarousel } from 'embla-carousel/react';
 import { useCallback, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { PrimaryButton } from './atoms/Button';
+import { Flex } from './atoms/Container';
 import ContactUsForm from './ContactUsForm';
 import Modal from './Modal';
 
@@ -16,7 +17,7 @@ const BoxContainer = styled.div`
 const BoxContainerText = styled.div`
   font-weight: 600;
   font-size: 64px;
-  color: ${props => props.theme.foreground};
+  color: ${props => props.theme.palettes.MAIN};
   margin-bottom: 5rem;
 `;
 
@@ -32,7 +33,7 @@ const Dot = styled(PrimaryButton)<{ selected: boolean }>`
   padding: 0px;
   width: 16px;
   height: 16px;
-  background-color: ${props => (props.selected ? `${props.theme.accent}` : `${props.theme.foreground}`)};
+  background-color: ${props => (props.selected ? `${props.theme.palettes.ACCENT}` : `${props.theme.palettes.MAIN}`)};
   border-radius: 50%;
 
   & + & {
@@ -78,9 +79,8 @@ const BoxSection = () => {
           height: 100%;
         `}
       >
-        <div
+        <Flex
           css={css`
-            display: flex;
             height: 100%;
           `}
         >
@@ -120,11 +120,11 @@ const BoxSection = () => {
               />
             </div>
           ))}
-        </div>
+        </Flex>
       </div>
       <Dots>
         {scrollSnaps.map((_, index) => (
-          <Dot key={index} selected={index === selectedIndex} onClick={() => scrollTo(index)} />
+          <Dot color="MAIN" key={index} selected={index === selectedIndex} onClick={() => scrollTo(index)} />
         ))}
       </Dots>
       <Modal onClose={() => setShowModal(false)} show={showModal}>

@@ -10,8 +10,8 @@ const HeroContainer = styled.div`
   margin: 5em 5em 0;
 
   ${props =>
-    props.theme.mixins.mediaquery(
-      'Slim',
+    props.theme.mediaquery(
+      'SLIM',
       css`
         display: flex;
         flex-direction: column;
@@ -31,8 +31,8 @@ const TextContainer = styled.div`
   height: 100%;
 
   ${props =>
-    props.theme.mixins.mediaquery(
-      'Slim',
+    props.theme.mediaquery(
+      'SLIM',
       css`
         position: relative;
       `
@@ -51,8 +51,8 @@ const BagImage = styled.div`
   opacity: 0.85;
 
   ${props =>
-    props.theme.mixins.mediaquery(
-      'Slim',
+    props.theme.mediaquery(
+      'SLIM',
       css`
         position: relative;
         top: -3em;
@@ -68,8 +68,8 @@ const CTA = styled(PrimaryButton)`
   transform: translateX(-50%);
 
   ${props =>
-    props.theme.mixins.mediaquery(
-      'Slim',
+    props.theme.mediaquery(
+      'SLIM',
       css`
         position: relative;
         top: 0;

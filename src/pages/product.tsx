@@ -4,7 +4,7 @@ import ProductTile from '../components/ProductTile';
 
 const Product = () => {
   const ListHeader = styled.div`
-    border: 1px solid ${props => props.theme.foreground};
+    border: 1px solid ${props => props.theme.palettes.MAIN};
     border-left: none;
     border-right: none;
     padding: 10px 0;

@@ -1,30 +1,34 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { DefaultFonts, DefaultPalettes } from '../../themes';
 
-export const Input = styled.input`
-  height: 3em;
+type FormFieldProps = {
+  color?: DefaultPalettes;
+  focus?: DefaultPalettes;
+  font?: DefaultFonts;
+};
+
+const commonFormFieldStyles = css<FormFieldProps>`
   padding: 1em;
-  font-size: 16px;
-  border: 2px solid ${props => props.theme.foreground};
+  ${({ font = 'BODY', theme }) => theme.text(font)};
+  border: 2px solid ${({ color = 'MAIN', theme }) => theme.palettes[color]};
 
   transition: border-color 0.3s ease-in-out;
 
   &:focus {
-    border-color: ${props => props.theme.accent};
+    border-color: ${({ focus = 'ACCENT', theme }) => theme.palettes[focus]};
     outline: none;
   }
 `;
 
-export const TextArea = styled.textarea`
+export const Input = styled.input<FormFieldProps>`
+  height: 3em;
+
+  ${commonFormFieldStyles};
+`;
+
+export const TextArea = styled.textarea<FormFieldProps>`
   min-height: 10em;
   max-width: 100%;
-  padding: 1em;
-  font-size: 16px;
-  border: 2px solid ${props => props.theme.foreground};
 
-  transition: border-color 0.3s ease-in-out;
-
-  &:focus {
-    border-color: ${props => props.theme.accent};
-    outline: none;
-  }
+  ${commonFormFieldStyles};
 `;

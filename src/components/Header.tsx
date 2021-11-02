@@ -14,8 +14,8 @@ const HeaderContainer = styled.header`
   width: 100%;
 
   ${props =>
-    props.theme.mixins.mediaquery(
-      'Slim',
+    props.theme.mediaquery(
+      'SLIM',
       css`
         position: relative;
         justify-content: center;
@@ -27,8 +27,8 @@ const HeaderContainer = styled.header`
 
 const Menu = styled.div`
   ${props =>
-    props.theme.mixins.mediaquery(
-      'Slim',
+    props.theme.mediaquery(
+      'SLIM',
       css`
         display: none;
       `
@@ -42,8 +42,8 @@ const MobileMenu = styled.button`
   outline: none;
 
   ${props =>
-    props.theme.mixins.mediaquery(
-      'Slim',
+    props.theme.mediaquery(
+      'SLIM',
       css`
         display: block;
         position: absolute;
@@ -53,7 +53,7 @@ const MobileMenu = styled.button`
 `;
 
 const MobileMenuContainer = styled.div<{ show: boolean }>`
-  background-color: ${props => props.theme.background};
+  background-color: ${props => props.theme.palettes.MAIN};
   overflow-y: hidden;
   position: absolute;
   top: 80px;
@@ -80,7 +80,7 @@ const MobileMenuLink = styled.button`
   font-weight: 400;
   font-size: 20px;
   line-height: 22px;
-  color: ${props => props.theme.foreground};
+  color: ${props => props.theme.palettes.MAIN};
 `;
 
 const MobileMenuSeparator = styled.hr`
@@ -95,7 +95,7 @@ const MenuLink = styled.button`
   font-weight: 600;
   font-size: 18px;
   line-height: 22px;
-  color: ${props => props.theme.foreground};
+  color: ${props => props.theme.palettes.MAIN};
 
   & + & {
     margin-left: 30px;
