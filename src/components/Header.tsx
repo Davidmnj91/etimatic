@@ -53,7 +53,7 @@ const MobileMenu = styled.button`
 `;
 
 const MobileMenuContainer = styled.div<{ show: boolean }>`
-  background-color: ${props => props.theme.palettes.MAIN};
+  background-color: ${props => props.theme.palettes.WHITE};
   overflow-y: hidden;
   position: absolute;
   top: 80px;

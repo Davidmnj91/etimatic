@@ -69,7 +69,7 @@ const ContactUsForm = () => {
             )}
         `}
       >
-        <Text font="HEADING2" color="ACCENT">
+        <Text font="HEADING1" color="ACCENT">
           CONTACTA CON NOSOTROS
         </Text>
 

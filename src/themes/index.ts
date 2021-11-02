@@ -56,7 +56,7 @@ export const breakPointBuilder = (maxWidth: number, fonts: Fonts): BreakPoint =>
 const buildMixins = (theme: CustomTheme): DesignSystemMixins => {
   return {
     mediaquery: (breakPoint: DefaultBreakPoints, cssProps: FlattenSimpleInterpolation) => css`
-      @media screen and (max-width: ${theme.breakPoints[breakPoint]}px) {
+      @media screen and (max-width: ${theme.breakPoints[breakPoint].maxWidth}px) {
         ${cssProps};
       }
     `,
