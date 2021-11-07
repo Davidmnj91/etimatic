@@ -18,7 +18,7 @@ const CatalogContainer = styled.div`
     props.theme.mediaquery(
       'SLIM',
       css`
-        padding: 0 1em;
+        padding: 0 1em 3em;
       `
     )}
 `;
@@ -148,7 +148,7 @@ const CatalogItems = [
 ];
 
 const CatalogSection = () => {
-  const { is } = useBreakpoint();
+  const { isBreakpoint } = useBreakpoint();
   const [viewportRef, embla] = useEmblaCarousel({ skipSnaps: false });
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -186,7 +186,7 @@ const CatalogSection = () => {
         NUESTRO PRODUCTO
       </Text>
       <CatalogCategories>
-        {is('FULL') ? (
+        {isBreakpoint('FULL') ? (
           Categories.map((c, index) => (
             <Category key={c} selected={selectedIndex === index} onClick={() => scrollTo(index)}>
               {c}

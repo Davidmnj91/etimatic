@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { BreakPoints } from '../themes';
 
 type BreakpointProviderProps = {
@@ -18,13 +18,35 @@ export const useBreakpoint = () => {
     throw new Error('useBreakpoint must be used within a BreakpointProvider');
   }
 
+  const isBreakpoint = (breakpoint: keyof BreakPoints) => {
+    const [targetReached, setTargetReached] = useState(false);
+
+    const updateTarget = useCallback((e: MediaQueryListEvent) => {
+      if (e.matches) {
+        setTargetReached(true);
+      } else {
+        setTargetReached(false);
+      }
+    }, []);
+
+    useEffect(() => {
+      const media = window.matchMedia(
+        `(min-width: ${context.breakpoints[breakpoint].minWidth}px) and (max-width: ${context.breakpoints[breakpoint].maxWidth}px)`
+      );
+      media.addEventListener('change', updateTarget);
+
+      // Check on mount (callback is not called until a change occurs)
+      if (media.matches) {
+        setTargetReached(true);
+      }
+
+      return () => media.removeEventListener('change', updateTarget);
+    }, []);
+
+    return targetReached;
+  };
+
   return {
-    is: (breakpoint: keyof BreakPoints) => {
-      return typeof window !== 'undefined'
-        ? window.matchMedia(
-            `(min-width: ${context.breakpoints[breakpoint].minWidth}px) and (max-width: ${context.breakpoints[breakpoint].maxWidth}px)`
-          ).matches
-        : false;
-    },
+    isBreakpoint,
   };
 };

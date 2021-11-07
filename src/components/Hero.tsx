@@ -41,6 +41,7 @@ const BagImage = styled.div<{ bagHeight: number }>`
   background-size: contain;
   background-repeat: no-repeat;
   background-position-x: center;
+  background-position-y: bottom;
   width: 100%;
   height: 100%;
   bottom: 0;
@@ -56,6 +57,7 @@ const BagImage = styled.div<{ bagHeight: number }>`
         width: 150%;
         height: calc(100% - ${props.bagHeight}%);
         background-size: cover;
+        background-position-y: unset;
       `
     )}
 `;

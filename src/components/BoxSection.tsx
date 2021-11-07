@@ -96,7 +96,8 @@ const BoxItemImage = styled.div<{ imageSrc: string }>`
       'SLIM',
       css`
         background-size: contain;
-        width: 100%;
+        width: 75%;
+        transform: translate(15%, -50%);
         left: 0;
       `
     )}
