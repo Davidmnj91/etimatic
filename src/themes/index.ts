@@ -16,6 +16,7 @@ export type Font = {
 };
 
 export type BreakPoint = {
+  minWidth: number;
   maxWidth: number;
   fonts: Fonts;
 };
@@ -51,12 +52,18 @@ export type DesignSystemMixins = {
 
 export const fontBuilder = (size: number, lineHeight: number, weight: number): Font => ({ size, lineHeight, weight });
 export const paletteBuilder = (colorString: string): Palette => colorString;
-export const breakPointBuilder = (maxWidth: number, fonts: Fonts): BreakPoint => ({ maxWidth, fonts });
+export const breakPointBuilder = (minWidth: number, maxWidth: number, fonts: Fonts): BreakPoint => ({
+  minWidth,
+  maxWidth,
+  fonts,
+});
 
 const buildMixins = (theme: CustomTheme): DesignSystemMixins => {
   return {
     mediaquery: (breakPoint: DefaultBreakPoints, cssProps: FlattenSimpleInterpolation) => css`
-      @media screen and (max-width: ${theme.breakPoints[breakPoint].maxWidth}px) {
+      @media screen and (min-width: ${theme.breakPoints[breakPoint].minWidth}px) and (max-width: ${theme.breakPoints[
+          breakPoint
+        ].maxWidth}px) {
         ${cssProps};
       }
     `,
@@ -67,7 +74,8 @@ const buildMixins = (theme: CustomTheme): DesignSystemMixins => {
     text: (font: DefaultFonts) => css`
       ${Object.keys(theme.breakPoints).map(
         b => css`
-          @media screen and (max-width: ${theme.breakPoints[b].maxWidth}px) {
+          @media screen and (min-width: ${theme.breakPoints[b].minWidth}px) and (max-width: ${theme.breakPoints[b]
+              .maxWidth}px) {
             font-size: ${theme.breakPoints[b].fonts[font].size}px;
             line-height: ${theme.breakPoints[b].fonts[font].lineHeight}px;
             font-weight: ${theme.breakPoints[b].fonts[font].weight};
@@ -102,21 +110,21 @@ const palettes: Palettes = {
 };
 
 const breakPoints: Record<string, BreakPoint> = {
-  FULL: breakPointBuilder(99999, {
-    HEADING1: fontBuilder(64, 67, 800),
-    HEADING2: fontBuilder(48, 50, 600),
-    TITLE: fontBuilder(20, 28, 500),
-    BODY: fontBuilder(16, 16, 500),
-    HIGHLIGHT: fontBuilder(16, 16, 600),
-    SMALL: fontBuilder(14, 14, 500),
-  }),
-  SLIM: breakPointBuilder(375, {
+  SLIM: breakPointBuilder(0, 375, {
     HEADING1: fontBuilder(33, 35, 800),
     HEADING2: fontBuilder(20, 22, 600),
     TITLE: fontBuilder(16, 18, 500),
     BODY: fontBuilder(14, 17, 500),
     HIGHLIGHT: fontBuilder(14, 17, 600),
     SMALL: fontBuilder(12, 15, 500),
+  }),
+  FULL: breakPointBuilder(376, 9999, {
+    HEADING1: fontBuilder(64, 67, 800),
+    HEADING2: fontBuilder(48, 50, 600),
+    TITLE: fontBuilder(20, 28, 500),
+    BODY: fontBuilder(16, 16, 500),
+    HIGHLIGHT: fontBuilder(16, 16, 600),
+    SMALL: fontBuilder(14, 14, 500),
   }),
 };
 

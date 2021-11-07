@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { DefaultFonts, DefaultPalettes } from '../../themes';
 
-export const Text = styled.label<{
+export const Text = styled.span<{
   color?: DefaultPalettes;
   font?: DefaultFonts;
 }>`

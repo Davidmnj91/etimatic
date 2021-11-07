@@ -14,7 +14,7 @@ export const ConstantsProvider = ({ children }: ConstantsProviderProps) => {
 export const useConstants = () => {
   const context = useContext(ConstantsContext);
   if (context === undefined) {
-    throw new Error('useCount must be used within a ConstantsProvider');
+    throw new Error('useConstants must be used within a ConstantsProvider');
   }
   return context;
 };

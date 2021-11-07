@@ -1,14 +1,26 @@
 import { useEmblaCarousel } from 'embla-carousel/react';
 import { useCallback, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
+import { useBreakpoint } from '../providers/breakpoint';
 import { PrimaryButton } from './atoms/Button';
+import { Flex } from './atoms/Container';
+import { Text } from './atoms/Text';
 
 const CatalogContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: 0 5em 5em;
   width: 100%;
+
+  ${props =>
+    props.theme.mediaquery(
+      'SLIM',
+      css`
+        padding: 0 1em;
+      `
+    )}
 `;
 
 const CatalogsRow = styled.div`
@@ -16,15 +28,11 @@ const CatalogsRow = styled.div`
   display: flex;
 `;
 
-const CatalogTitle = styled.h2`
-  font-weight: 900;
-  font-size: 64px;
-  color: ${props => props.theme.palettes.MAIN};
-`;
-
 const CatalogCategories = styled.div`
   display: flex;
   justify-content: center;
+  width: 100%;
+  margin-top: 40px;
 `;
 
 const Category = styled(PrimaryButton)<{ selected: boolean }>`
@@ -74,17 +82,38 @@ const CatalogItemContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-width: 100%;
+  flex: 1 0 100%;
 `;
 
-const CatalogItemImage = styled.img`
+const CatalogItemImage = styled.div<{ imageSrc: string }>`
+  width: 100%;
+  height: 300px;
+  background-image: ${({ imageSrc }) => `url(${imageSrc})`};
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   margin-bottom: 20px;
 `;
 
 const CatalogItemButton = styled(PrimaryButton)`
   text-decoration: none;
   margin-top: 20px;
-  width: 400px;
+  max-width: 400px;
+
+  ${props =>
+    props.theme.mediaquery(
+      'SLIM',
+      css`
+        width: 90%;
+      `
+    )}
+`;
+
+const Separator = styled.div`
+  border: 1px solid ${props => props.theme.palettes.MAIN};
+  width: 100%;
+  height: 1px;
+  margin: 0 16px 3em;
 `;
 
 const Categories = [
@@ -113,11 +142,15 @@ const CatalogItems = [
 ];
 
 const CatalogSection = () => {
+  const { is } = useBreakpoint();
   const [viewportRef, embla] = useEmblaCarousel({ skipSnaps: false });
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const scrollTo = useCallback(
     index => {
+      if (index < 0 || index >= CatalogItems.length) {
+        return;
+      }
       setSelectedIndex(index);
       embla && embla.scrollTo(index);
     },
@@ -137,14 +170,59 @@ const CatalogSection = () => {
 
   return (
     <CatalogContainer>
-      <CatalogTitle>NUESTRO PRODUCTO</CatalogTitle>
-
+      {is('SLIM') && <Separator />}
+      <Text
+        font="HEADING1"
+        css={css`
+          text-align: center;
+        `}
+      >
+        NUESTRO PRODUCTO
+      </Text>
       <CatalogCategories>
-        {Categories.map((c, index) => (
-          <Category key={index} selected={selectedIndex === index} onClick={() => scrollTo(index)}>
-            {c}
-          </Category>
-        ))}
+        {is('FULL') &&
+          Categories.map((c, index) => (
+            <Category key={c} selected={selectedIndex === index} onClick={() => scrollTo(index)}>
+              {c}
+            </Category>
+          ))}
+        {is('SLIM') && (
+          <Flex flex="1 0 100%" justifyContent="space-between">
+            <button
+              onClick={() => scrollTo(selectedIndex - 1)}
+              css={css`
+                background: transparent;
+                border: none;
+                outline: none;
+              `}
+            >
+              <svg width="13" height="22" viewBox="0 0 13 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M0.748847 11.7109C0.340014 11.3175 0.340014 10.6632 0.748847 10.2698L10.4981 0.888568C11.2555 0.159721 12.4804 0.94322 12.1364 1.93647L9.11339 10.663C9.03994 10.875 9.03994 11.1056 9.11339 11.3177L12.1364 20.0442C12.4804 21.0375 11.2555 21.8209 10.4981 21.0921L0.748847 11.7109Z"
+                  fill="#393939"
+                />
+              </svg>
+            </button>
+
+            <Category selected={true}>{Categories[selectedIndex]}</Category>
+
+            <button
+              onClick={() => scrollTo(selectedIndex + 1)}
+              css={css`
+                background: transparent;
+                border: none;
+                outline: none;
+              `}
+            >
+              <svg width="13" height="22" viewBox="0 0 13 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M11.7512 10.2698C12.16 10.6632 12.16 11.3176 11.7512 11.711L2.00194 21.0921C1.2445 21.821 0.019577 21.0375 0.363649 20.0442L3.38661 11.3177C3.46006 11.1057 3.46006 10.8751 3.38661 10.6631L0.363649 1.93651C0.0195769 0.943264 1.2445 0.159768 2.00194 0.888615L11.7512 10.2698Z"
+                  fill="#393939"
+                />
+              </svg>
+            </button>
+          </Flex>
+        )}
       </CatalogCategories>
       <div
         ref={viewportRef}
@@ -155,8 +233,8 @@ const CatalogSection = () => {
       >
         <CatalogsRow>
           {CatalogItems.map(({ image, catalog }) => (
-            <CatalogItemContainer key={0}>
-              <CatalogItemImage src={image} width="400px" />
+            <CatalogItemContainer key={catalog}>
+              <CatalogItemImage imageSrc={image} />
               <CatalogItemButton as="a" href={catalog} target="_blank">
                 Ver Catálogo
               </CatalogItemButton>

@@ -50,7 +50,7 @@ const Footer = () => {
         </Text>
         <br />
         {phones.map(({ display, callNumber }, index, arr) => (
-          <>
+          <div key={callNumber}>
             <Text
               font="BODY"
               color="WHITE"
@@ -63,7 +63,7 @@ const Footer = () => {
               {display}
             </Text>
             {arr.length - 1 !== index && <> / </>}
-          </>
+          </div>
         ))}
       </Flex>
     </Flex>

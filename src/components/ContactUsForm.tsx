@@ -5,22 +5,6 @@ import { Flex } from './atoms/Container';
 import { Input, TextArea } from './atoms/Input';
 import { Text } from './atoms/Text';
 
-const ContactUsBody = styled.div`
-  flex: 0 0 50%;
-  padding: 5em;
-  background-color: ${props => props.theme.palettes.WHITE};
-
-  ${props =>
-    props.theme.mediaquery(
-      'SLIM',
-      css`
-        flex: 1 0 50%;
-        justify-content: center;
-        padding: 2em 1em 1em;
-      `
-    )}
-`;
-
 const ContactUsLink = styled.a`
   color: ${props => props.theme.palettes.WHITE};
   text-decoration: none;
@@ -30,7 +14,7 @@ const ContactUsLink = styled.a`
     props.theme.mediaquery(
       'SLIM',
       css`
-        margin-top: 1em;
+        margin-top: 0em;
         text-align: center;
       `
     )}
@@ -46,6 +30,7 @@ const ContactUsForm = () => {
           props.theme.mediaquery(
             'SLIM',
             css`
+              height: 100vh;
               flex-direction: column;
             `
           )}
@@ -54,7 +39,7 @@ const ContactUsForm = () => {
       <Flex
         palette="MAIN"
         direction="column"
-        flex="0 0 50%"
+        flex="50%"
         css={css`
           padding: 5em;
 
@@ -62,9 +47,9 @@ const ContactUsForm = () => {
             props.theme.mediaquery(
               'SLIM',
               css`
-                flex: 1 0 50%;
                 justify-content: center;
                 padding: 4em 2em 2em;
+                text-align: center;
               `
             )}
         `}
@@ -79,6 +64,14 @@ const ContactUsForm = () => {
           direction="column"
           css={css`
             margin-top: 10em;
+
+            ${props =>
+              props.theme.mediaquery(
+                'SLIM',
+                css`
+                  margin-top: 5em;
+                `
+              )}
           `}
         >
           <ContactUsLink href={location.mapsUrl} target="_blank" rel="noreferrer">
@@ -128,8 +121,8 @@ const ContactUsForm = () => {
         </Flex>
       </Flex>
       <Flex
-        flex="0 0 50%"
         palette="WHITE"
+        flex="50%"
         css={css`
           padding: 5em;
 
@@ -137,9 +130,9 @@ const ContactUsForm = () => {
             props.theme.mediaquery(
               'SLIM',
               css`
-                flex: 1 0 50%;
                 justify-content: center;
-                padding: 4em 2em 2em;
+                padding: 2em 2em 2em;
+                text-align: center;
               `
             )}
         `}

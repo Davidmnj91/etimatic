@@ -6,8 +6,10 @@ import Modal from './Modal';
 
 const HeroContainer = styled.div`
   position: relative;
-  height: calc(100vh - 80px - 5em);
-  margin: 5em 5em 0;
+  height: calc(100vh - 80px);
+  padding: 5em 5em 0;
+  width: 100%;
+  overflow: hidden;
 
   ${props =>
     props.theme.mediaquery(
@@ -15,13 +17,15 @@ const HeroContainer = styled.div`
       css`
         display: flex;
         flex-direction: column;
-        margin: 0em 1em;
+        padding: 0em 1em;
       `
     )}
 `;
 
 const TextContainer = styled.div`
   position: absolute;
+  top: -25%;
+  left: 0;
   background-image: url('images/home_titulo.png');
   background-size: contain;
   background-repeat: no-repeat;
@@ -34,7 +38,7 @@ const TextContainer = styled.div`
     props.theme.mediaquery(
       'SLIM',
       css`
-        position: relative;
+        top: -30%;
       `
     )}
 `;
@@ -42,21 +46,25 @@ const TextContainer = styled.div`
 const BagImage = styled.div`
   position: absolute;
   background-image: url('images/bag_home.png');
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   width: 100%;
-  height: calc(100% - 5em);
-  top: 5em;
+  height: 100%;
+  bottom: 0;
+  left: 0;
   opacity: 0.85;
 
   ${props =>
     props.theme.mediaquery(
       'SLIM',
       css`
-        position: relative;
-        top: -3em;
-        height: calc(100%);
+        top: 35%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 150%;
+        height: calc(100% - 35%);
+        background-size: cover;
       `
     )}
 `;
@@ -71,10 +79,8 @@ const CTA = styled(PrimaryButton)`
     props.theme.mediaquery(
       'SLIM',
       css`
-        position: relative;
-        top: 0;
-        left: 0;
-        transform: none;
+        top: 80%;
+        width: 230px;
       `
     )}
 `;

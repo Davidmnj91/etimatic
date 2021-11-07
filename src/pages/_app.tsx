@@ -1,5 +1,6 @@
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import MainLayout from '../components/MainLayout';
+import { BreakpointProvider } from '../providers/breakpoint';
 import { ConstantsProvider } from '../providers/constants';
 import { lightTheme } from '../themes';
 import '../themes/global-style.css';
@@ -22,11 +23,13 @@ export default function App({ Component, pageProps }: any) {
     <>
       <GlobalStyle />
       <ThemeProvider theme={lightTheme}>
-        <ConstantsProvider>
-          <MainLayout>
-            <Component {...pageProps} />
-          </MainLayout>
-        </ConstantsProvider>
+        <BreakpointProvider breakpoints={lightTheme.breakPoints}>
+          <ConstantsProvider>
+            <MainLayout>
+              <Component {...pageProps} />
+            </MainLayout>
+          </ConstantsProvider>
+        </BreakpointProvider>
       </ThemeProvider>
     </>
   );
