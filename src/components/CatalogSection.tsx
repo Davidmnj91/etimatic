@@ -109,11 +109,17 @@ const CatalogItemButton = styled(PrimaryButton)`
     )}
 `;
 
-const Separator = styled.div`
-  border: 1px solid ${props => props.theme.palettes.MAIN};
-  width: 100%;
-  height: 1px;
-  margin: 0 16px 3em;
+const Divider = styled.div`
+  ${props =>
+    props.theme.mediaquery(
+      'SLIM',
+      css`
+        border: 1px solid ${props => props.theme.palettes.MAIN};
+        width: 100%;
+        height: 1px;
+        margin: 0 16px 3em;
+      `
+    )}
 `;
 
 const Categories = [
@@ -170,7 +176,7 @@ const CatalogSection = () => {
 
   return (
     <CatalogContainer>
-      {is('SLIM') && <Separator />}
+      <Divider />
       <Text
         font="HEADING1"
         css={css`
@@ -180,13 +186,13 @@ const CatalogSection = () => {
         NUESTRO PRODUCTO
       </Text>
       <CatalogCategories>
-        {is('FULL') &&
+        {is('FULL') ? (
           Categories.map((c, index) => (
             <Category key={c} selected={selectedIndex === index} onClick={() => scrollTo(index)}>
               {c}
             </Category>
-          ))}
-        {is('SLIM') && (
+          ))
+        ) : (
           <Flex flex="1 0 100%" justifyContent="space-between">
             <button
               onClick={() => scrollTo(selectedIndex - 1)}

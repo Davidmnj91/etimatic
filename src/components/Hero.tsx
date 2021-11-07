@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { PrimaryButton } from './atoms/Button';
 import ContactUsForm from './ContactUsForm';
@@ -6,7 +6,7 @@ import Modal from './Modal';
 
 const HeroContainer = styled.div`
   position: relative;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 60px);
   padding: 5em 5em 0;
   width: 100%;
   overflow: hidden;
@@ -24,31 +24,23 @@ const HeroContainer = styled.div`
 
 const TextContainer = styled.div`
   position: absolute;
-  top: -25%;
+  top: 3em;
   left: 0;
   background-image: url('images/home_titulo.png');
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: top;
 
   width: 100%;
   height: 100%;
-
-  ${props =>
-    props.theme.mediaquery(
-      'SLIM',
-      css`
-        top: -30%;
-      `
-    )}
 `;
 
-const BagImage = styled.div`
+const BagImage = styled.div<{ bagHeight: number }>`
   position: absolute;
   background-image: url('images/bag_home.png');
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position-x: center;
   width: 100%;
   height: 100%;
   bottom: 0;
@@ -59,11 +51,10 @@ const BagImage = styled.div`
     props.theme.mediaquery(
       'SLIM',
       css`
-        top: 35%;
         left: 50%;
         transform: translateX(-50%);
         width: 150%;
-        height: calc(100% - 35%);
+        height: calc(100% - ${props.bagHeight}%);
         background-size: cover;
       `
     )}
@@ -79,19 +70,31 @@ const CTA = styled(PrimaryButton)`
     props.theme.mediaquery(
       'SLIM',
       css`
-        top: 80%;
+        top: unset;
+        bottom: 10%;
         width: 230px;
       `
     )}
 `;
 
+const textRatio = 0.44;
+
 const Hero = () => {
   const [showModal, setShowModal] = useState(false);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+    const result = (window.innerWidth * (textRatio * 10)) / 100;
+    setHeight(result);
+  });
 
   return (
     <HeroContainer>
       <TextContainer />
-      <BagImage />
+      <BagImage bagHeight={height} />
       <CTA onClick={() => setShowModal(true)}>Necesito Packaging</CTA>
       <Modal onClose={() => setShowModal(false)} show={showModal}>
         <ContactUsForm />

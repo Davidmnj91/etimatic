@@ -56,7 +56,7 @@ const MobileMenuContainer = styled.div<{ show: boolean }>`
   background-color: ${props => props.theme.palettes.WHITE};
   overflow-y: hidden;
   position: absolute;
-  top: 80px;
+  top: 60px;
   left: 0;
   bottom: 0;
   right: 0;
@@ -115,7 +115,7 @@ const Header = () => {
 
   return (
     <HeaderContainer>
-      <Logo width="180px" height="80px" />
+      <Logo width="180px" height="60px" />
       <Menu>
         <MenuLink onClick={() => scrollToSection('#products')}>PRODUCTOS</MenuLink>
         <MenuLink onClick={() => scrollToSection('#about_us')}>QUIENES SOMOS </MenuLink>
