@@ -1,115 +1,16 @@
-import {
-  css,
-  DefaultTheme,
-  FlattenInterpolation,
-  FlattenSimpleInterpolation,
-  ThemedStyledProps,
-  ThemeProps,
-} from 'styled-components';
+import { BreakPoint, breakPointBuilder, buildTheme, fontBuilder, paletteBuilder, Palettes } from './DesignSystem';
 
-export type Palette = string;
+export type BreakPointNames = 'SLIM' | 'FULL';
+export type FontNames = 'HEADING1' | 'HEADING2' | 'TITLE' | 'BODY' | 'HIGHLIGHT' | 'SMALL';
+export type PaletteNames = 'MAIN' | 'ACCENT' | 'WHITE';
 
-export type Font = {
-  size: number;
-  lineHeight: number;
-  weight: number;
-};
-
-export type BreakPoint = {
-  minWidth: number;
-  maxWidth: number;
-  fonts: Fonts;
-};
-
-export type DefaultBreakPoints = 'SLIM' | 'FULL';
-export type DefaultFonts = 'HEADING1' | 'HEADING2' | 'TITLE' | 'BODY' | 'HIGHLIGHT' | 'SMALL';
-export type DefaultPalettes = 'MAIN' | 'ACCENT' | 'WHITE';
-
-export type BreakPoints = Record<DefaultBreakPoints, BreakPoint>;
-export type Fonts = Record<DefaultFonts, Font>;
-export type Palettes = Record<DefaultPalettes, Palette>;
-
-export type CustomTheme = {
-  palettes: Palettes;
-  breakPoints: BreakPoints;
-  baseGrid: number;
-};
-
-export type DesignSystemTheme = CustomTheme & DesignSystemMixins;
-
-export type DesignSystemMixins = {
-  mediaquery: <R extends Record<any, any>>(
-    breakPoint: DefaultBreakPoints,
-    cssProps: FlattenSimpleInterpolation | FlattenInterpolation<ThemeProps<DefaultTheme>>
-  ) => FlattenInterpolation<ThemedStyledProps<any, R>>;
-  spacing: (multiplier: number) => string;
-  colour: <R extends Record<any, any>>(
-    background?: DefaultPalettes,
-    color?: DefaultPalettes
-  ) => FlattenInterpolation<ThemedStyledProps<any, R>>;
-  text: <R extends Record<any, any>>(font: DefaultFonts) => FlattenInterpolation<ThemedStyledProps<any, R>>;
-};
-
-export const fontBuilder = (size: number, lineHeight: number, weight: number): Font => ({ size, lineHeight, weight });
-export const paletteBuilder = (colorString: string): Palette => colorString;
-export const breakPointBuilder = (minWidth: number, maxWidth: number, fonts: Fonts): BreakPoint => ({
-  minWidth,
-  maxWidth,
-  fonts,
-});
-
-const buildMixins = (theme: CustomTheme): DesignSystemMixins => {
-  return {
-    mediaquery: (breakPoint: DefaultBreakPoints, cssProps: FlattenSimpleInterpolation) => css`
-      @media screen and (min-width: ${theme.breakPoints[breakPoint].minWidth}px) and (max-width: ${theme.breakPoints[
-          breakPoint
-        ].maxWidth}px) {
-        ${cssProps};
-      }
-    `,
-    colour: (background?: DefaultPalettes, color?: DefaultPalettes) => css`
-      ${background && `background-color: ${theme.palettes[background]};`}
-      ${color && `color: ${theme.palettes[color]};`}
-    `,
-    text: (font: DefaultFonts) => css`
-      ${Object.keys(theme.breakPoints).map(
-        b => css`
-          @media screen and (min-width: ${theme.breakPoints[b].minWidth}px) and (max-width: ${theme.breakPoints[b]
-              .maxWidth}px) {
-            font-size: ${theme.breakPoints[b].fonts[font].size}px;
-            line-height: ${theme.breakPoints[b].fonts[font].lineHeight}px;
-            font-weight: ${theme.breakPoints[b].fonts[font].weight};
-          }
-        `
-      )}
-    `,
-    spacing: (multiplier: number) => `${theme.baseGrid * multiplier}px`,
-  };
-};
-
-export const buildTheme = (
-  palettes: Record<DefaultPalettes, Palette>,
-  breakPoints: Record<DefaultBreakPoints, BreakPoint>,
-  baseGrid: number
-): DesignSystemTheme => {
-  const theme: CustomTheme = {
-    palettes,
-    breakPoints,
-    baseGrid,
-  };
-
-  const mixins = buildMixins(theme);
-
-  return { ...theme, ...mixins };
-};
-
-const palettes: Palettes = {
+const palettes: Palettes<PaletteNames> = {
   MAIN: paletteBuilder('#393939'),
   ACCENT: paletteBuilder('#00FFA3'),
   WHITE: paletteBuilder('#fff'),
 };
 
-const breakPoints: Record<string, BreakPoint> = {
+const breakPoints: Record<BreakPointNames, BreakPoint<FontNames>> = {
   SLIM: breakPointBuilder(0, 1199, {
     HEADING1: fontBuilder(33, 35, 800),
     HEADING2: fontBuilder(20, 22, 600),

@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components';
-import { DefaultFonts, DefaultPalettes } from '../../themes';
+import { FontNames, PaletteNames } from '../../themes';
 
 type FormFieldProps = {
-  color?: DefaultPalettes;
-  focus?: DefaultPalettes;
-  font?: DefaultFonts;
+  color?: PaletteNames;
+  focus?: PaletteNames;
+  font?: FontNames;
 };
 
 const commonFormFieldStyles = css<FormFieldProps>`

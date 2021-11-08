@@ -1,9 +1,9 @@
 import styled, { css, CSSProperties } from 'styled-components';
-import { DefaultFonts, DefaultPalettes } from '../../themes';
+import { FontNames, PaletteNames } from '../../themes';
 
 type ContainerProps = {
-  palette?: DefaultPalettes;
-  font?: DefaultFonts;
+  palette?: PaletteNames;
+  font?: FontNames;
 };
 
 type FlexProps = {
@@ -15,8 +15,8 @@ type FlexProps = {
 };
 
 export const Container = styled.div<{
-  palette?: DefaultPalettes;
-  font?: DefaultFonts;
+  palette?: PaletteNames;
+  font?: FontNames;
 }>`
   ${props => props.palette && props.theme.colour(props.palette)};
   ${props => props.font && props.theme.text(props.font)};

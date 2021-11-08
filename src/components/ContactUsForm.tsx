@@ -1,9 +1,24 @@
+import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useConstants } from '../providers/constants';
 import { PrimaryButton } from './atoms/Button';
 import { Flex } from './atoms/Container';
 import { Input, TextArea } from './atoms/Input';
 import { Text } from './atoms/Text';
+
+const ContactUsContainer = styled.div<{ panelHeight: number }>`
+  display: flex;
+  flex-direction: row;
+
+  ${props =>
+    props.theme.mediaquery(
+      'SLIM',
+      css`
+        height: ${props.panelHeight}px;
+        flex-direction: column;
+      `
+    )}
+`;
 
 const ContactUsLink = styled.a`
   color: ${props => props.theme.palettes.WHITE};
@@ -22,20 +37,16 @@ const ContactUsLink = styled.a`
 
 const ContactUsForm = () => {
   const { mail, location, phones } = useConstants();
+  const [panelHeight, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setHeight(window.innerHeight);
+    }
+  }, [window]);
+
   return (
-    <Flex
-      direction="row"
-      css={css`
-        ${props =>
-          props.theme.mediaquery(
-            'SLIM',
-            css`
-              height: 100vh;
-              flex-direction: column;
-            `
-          )}
-      `}
-    >
+    <ContactUsContainer panelHeight={panelHeight}>
       <Flex
         palette="MAIN"
         direction="column"
@@ -215,7 +226,7 @@ const ContactUsForm = () => {
           </Flex>
         </Flex>
       </Flex>
-    </Flex>
+    </ContactUsContainer>
   );
 };
 

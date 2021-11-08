@@ -74,7 +74,7 @@ const CTA = styled(PrimaryButton)`
       css`
         top: unset;
         bottom: 10%;
-        width: 230px;
+        width: 240px;
       `
     )}
 `;

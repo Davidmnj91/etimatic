@@ -124,6 +124,7 @@ const Dot = styled(PrimaryButton)<{ selected: boolean }>`
   width: 16px;
   height: 16px;
   background-color: ${props => (props.selected ? `${props.theme.palettes.ACCENT}` : `${props.theme.palettes.MAIN}`)};
+  border-color: ${props => (props.selected ? `${props.theme.palettes.ACCENT}` : `${props.theme.palettes.MAIN}`)};
   border-radius: 50%;
 
   & + & {
@@ -132,6 +133,7 @@ const Dot = styled(PrimaryButton)<{ selected: boolean }>`
 
   &:hover {
     background-color: ${props => (props.selected ? `${props.theme.palettes.ACCENT}` : `${props.theme.palettes.MAIN}`)};
+    border-color: ${props => (props.selected ? `${props.theme.palettes.ACCENT}` : `${props.theme.palettes.MAIN}`)};
   }
 `;
 

@@ -1,8 +1,9 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
-import { BreakPoints } from '../themes';
+import { BreakPointNames, FontNames } from '../themes';
+import { BreakPoints } from '../themes/DesignSystem';
 
 type BreakpointProviderProps = {
-  breakpoints: BreakPoints;
+  breakpoints: BreakPoints<BreakPointNames, FontNames>;
   children: React.ReactNode;
 };
 
@@ -18,7 +19,7 @@ export const useBreakpoint = () => {
     throw new Error('useBreakpoint must be used within a BreakpointProvider');
   }
 
-  const isBreakpoint = (breakpoint: keyof BreakPoints) => {
+  const isBreakpoint = (breakpoint: BreakPointNames) => {
     const [targetReached, setTargetReached] = useState(false);
 
     const updateTarget = useCallback((e: MediaQueryListEvent) => {

@@ -40,6 +40,7 @@ const Category = styled(PrimaryButton)<{ selected: boolean }>`
   border-radius: 4px;
   padding: 5px 20px;
   background-color: ${props => (props.selected ? `${props.theme.palettes.ACCENT}` : `${props.theme.palettes.MAIN}`)};
+  border-color: ${props => (props.selected ? `${props.theme.palettes.ACCENT}` : `${props.theme.palettes.MAIN}`)};
   color: ${props => (props.selected ? `${props.theme.palettes.MAIN}` : `${props.theme.palettes.WHITE}`)};
 
   transition: background 0.3s ease-in-out, color 0.3s ease-in-out border-color 0.3s ease-in-out;
@@ -50,6 +51,7 @@ const Category = styled(PrimaryButton)<{ selected: boolean }>`
 
   &:hover {
     background-color: ${props => props.theme.palettes.ACCENT};
+    border-color: ${props => props.theme.palettes.ACCENT};
     color: ${props => props.theme.palettes.MAIN};
   }
 

@@ -1,8 +1,9 @@
 import { CSSProp } from 'styled-components';
-import { DesignSystemTheme } from './src/themes';
+import { BreakPointNames, FontNames, PaletteNames } from './src/themes';
+import { DesignSystemTheme } from './src/themes/DesignSystem';
 
 declare module 'styled-components' {
-  export interface DefaultTheme extends DesignSystemTheme {} // extends the global DefaultTheme with our ThemeType.
+  export interface DefaultTheme extends DesignSystemTheme<BreakPointNames, FontNames, PaletteNames> {} // extends the global DefaultTheme with our ThemeType.
 }
 
 declare module 'react' {
