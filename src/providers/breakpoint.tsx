@@ -34,14 +34,16 @@ export const useBreakpoint = () => {
       const media = window.matchMedia(
         `(min-width: ${context.breakpoints[breakpoint].minWidth}px) and (max-width: ${context.breakpoints[breakpoint].maxWidth}px)`
       );
-      media.addEventListener('change', updateTarget);
+      const supportsNewListeners = media.addEventListener !== undefined;
+      supportsNewListeners ? media.addEventListener('change', updateTarget) : media.addListener(updateTarget);
 
       // Check on mount (callback is not called until a change occurs)
       if (media.matches) {
         setTargetReached(true);
       }
 
-      return () => media.removeEventListener('change', updateTarget);
+      return () =>
+        supportsNewListeners ? media.removeEventListener('change', updateTarget) : media.removeListener(updateTarget);
     }, []);
 
     return targetReached;
