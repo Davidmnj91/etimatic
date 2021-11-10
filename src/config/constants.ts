@@ -1,5 +1,5 @@
 export const Constants = {
-  mail: 'info@etimatic.com',
+  mail: 'yago@etimatic.com',
   location: {
     address: 'C/ Lepanto 71, Bajo. 30510',
     city: 'Yecla - Murcia',
