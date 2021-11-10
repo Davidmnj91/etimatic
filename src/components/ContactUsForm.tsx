@@ -58,8 +58,8 @@ const ContactUsForm = () => {
             props.theme.mediaquery(
               'SLIM',
               css`
-                justify-content: center;
-                padding: 4em 2em 2em;
+                justify-content: space-around;
+                padding: 50px 0 10px;
                 text-align: center;
               `
             )}
@@ -80,7 +80,7 @@ const ContactUsForm = () => {
               props.theme.mediaquery(
                 'SLIM',
                 css`
-                  margin-top: 5em;
+                  margin-top: 0;
                 `
               )}
           `}
@@ -141,6 +141,7 @@ const ContactUsForm = () => {
             props.theme.mediaquery(
               'SLIM',
               css`
+                flex: 1 0 auto;
                 justify-content: center;
                 padding: 2em 2em 2em;
                 text-align: center;

@@ -17,6 +17,11 @@ const Modal = ({ show, onClose, children }: ModalProps) => {
     setIsBrowser(true);
   }, []);
 
+  useEffect(() => {
+    show && (document.body.style.overflow = 'hidden');
+    !show && (document.body.style.overflow = '');
+  }, [show]);
+
   const handleCloseClick = e => {
     e.preventDefault();
     onClose();
@@ -65,9 +70,17 @@ const StyledModalHeader = styled.div`
 
 const StyledModal = styled.div`
   position: relative;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   max-width: 100%;
   max-height: 100%;
   overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const StyledModalOverlay = styled.div`

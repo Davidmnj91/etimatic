@@ -7,17 +7,22 @@ import Logo from './svgs/Logo';
 import MenuIcon from './svgs/MenuIcon';
 
 const HeaderContainer = styled.header`
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+
   display: flex;
   align-items: center;
   padding: 0 3em;
   justify-content: space-between;
-  width: 100%;
+
+  background: ${props => props.theme.palettes.WHITE};
 
   ${props =>
     props.theme.mediaquery(
       'SLIM',
       css`
-        position: relative;
         justify-content: center;
         padding: 0 16px;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);

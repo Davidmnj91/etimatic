@@ -11,7 +11,7 @@ const ContactUsButton = styled.div`
   height: 48px;
   cursor: pointer;
 
-  position: absolute;
+  position: fixed;
   right: 3em;
   bottom: 3em;
 
