@@ -47,6 +47,35 @@ const Modal = ({ show, onClose, children }: ModalProps) => {
   }
 };
 
+const StyledModalOverlay = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: ${FadeInAnimation} 0.3s;
+  z-index: 5;
+`;
+
+const StyledModal = styled.div`
+  position: relative;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const StyledModalBody = styled.div`
   max-height: 100%;
   max-width: 100%;
@@ -66,35 +95,6 @@ const StyledModalHeader = styled.div`
         right: 12px;
       `
     )}
-`;
-
-const StyledModal = styled.div`
-  position: relative;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  max-width: 100%;
-  max-height: 100%;
-  overflow: hidden;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const StyledModalOverlay = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  animation: ${FadeInAnimation} 0.3s;
-  z-index: 5;
 `;
 
 const CloseButton = styled(CloseIcon)`
