@@ -1,4 +1,5 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document';
+import Script from 'next/script';
 import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
@@ -31,13 +32,15 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <script async src="https://www.googletagmanager.com/gtag/js?id=G-0FMVBG47XE"></script>
-          <script
+          <Script async src="https://www.googletagmanager.com/gtag/js?id=G-0FMVBG47XE"></Script>
+          <Script
+            strategy="afterInteractive"
             dangerouslySetInnerHTML={{
               __html: `window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-0FMVBG47XE');`,
             }}
-          ></script>
-          <script
+          ></Script>
+          <Script
+            strategy="afterInteractive"
             dangerouslySetInnerHTML={{
               __html: `
                 (function(h,o,t,j,a,r){
@@ -49,7 +52,7 @@ export default class MyDocument extends Document {
                     a.appendChild(r);
                 })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');`,
             }}
-          ></script>
+          ></Script>
           <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png" />
           <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png" />
           <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png" />
