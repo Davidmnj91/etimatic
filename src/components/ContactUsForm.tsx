@@ -38,6 +38,36 @@ const ContactUsLink = styled.a`
 const ContactUsForm = () => {
   const { mail, location, phones } = useConstants();
   const [panelHeight, setHeight] = useState(0);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    const data = {
+      name,
+      email,
+      message,
+    };
+
+    fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then(res => {
+      if (res.status === 200) {
+        setSubmitted(true);
+        setName('');
+        setEmail('');
+        setMessage('');
+      }
+    });
+  };
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -149,83 +179,108 @@ const ContactUsForm = () => {
             )}
         `}
       >
-        <Flex
-          as="form"
-          direction="column"
-          flex="1 0 auto"
-          action={`mailto:${mail}`}
-          method="POST"
-          encType="multipart/form-data"
-          name="Contactanos"
-          css={css`
-            grid-gap: 2em;
-
-            ${props =>
-              props.theme.mediaquery(
-                'SLIM',
-                css`
-                  grid-gap: 1em;
-                `
-              )}
-          `}
-        >
-          <Text color="MAIN" font="HEADING1">
-            FORMULARIO
+        {submitted && (
+          <Text color="ACCENT" font="HEADING1">
+            Gracias, nos pondremos en contacto cuanto antes con usted
           </Text>
-          <Input type="text" placeholder="Nombre*" />
-          <Input type="mail" placeholder="Mail*" />
-          <TextArea placeholder="Tu mensaje" />
-
+        )}
+        {!submitted && (
           <Flex
-            justifyContent="space-between"
-            alignItems="center"
+            as="form"
+            direction="column"
+            flex="1 0 auto"
+            name="Contactanos"
+            onSubmit={handleSubmit}
             css={css`
+              grid-gap: 2em;
+
               ${props =>
                 props.theme.mediaquery(
                   'SLIM',
                   css`
-                    justify-content: center;
+                    grid-gap: 1em;
                   `
                 )}
             `}
           >
-            <Text
-              as="a"
-              font="BODY"
-              color="MAIN"
-              css={css`
-                text-decoration: none;
-
-                ${props =>
-                  props.theme.mediaquery(
-                    'SLIM',
-                    css`
-                      display: none;
-                    `
-                  )}
-              `}
-              href={`mailto:${mail}`}
-            >
-              {mail}
+            <Text color="MAIN" font="HEADING1">
+              FORMULARIO
             </Text>
-            <PrimaryButton
-              css={css`
-                min-width: 15em;
+            <Input
+              type="text"
+              placeholder="Nombre*"
+              onChange={e => {
+                setName(e.target.value);
+              }}
+              name="name"
+            />
+            <Input
+              type="mail"
+              placeholder="Mail*"
+              onChange={e => {
+                setEmail(e.target.value);
+              }}
+              name="mail"
+            />
+            <TextArea
+              placeholder="Tu mensaje"
+              onChange={e => {
+                setMessage(e.target.value);
+              }}
+              name="message"
+            />
 
+            <Flex
+              justifyContent="space-between"
+              alignItems="center"
+              css={css`
                 ${props =>
                   props.theme.mediaquery(
                     'SLIM',
                     css`
-                      width: 100%;
+                      justify-content: center;
                     `
                   )}
               `}
-              type="submit"
             >
-              Enviar
-            </PrimaryButton>
+              <Text
+                as="a"
+                font="BODY"
+                color="MAIN"
+                css={css`
+                  text-decoration: none;
+
+                  ${props =>
+                    props.theme.mediaquery(
+                      'SLIM',
+                      css`
+                        display: none;
+                      `
+                    )}
+                `}
+                href={`mailto:${mail}`}
+              >
+                {mail}
+              </Text>
+              <PrimaryButton
+                css={css`
+                  min-width: 15em;
+
+                  ${props =>
+                    props.theme.mediaquery(
+                      'SLIM',
+                      css`
+                        width: 100%;
+                      `
+                    )}
+                `}
+                type="submit"
+              >
+                Enviar
+              </PrimaryButton>
+            </Flex>
           </Flex>
-        </Flex>
+        )}
       </Flex>
     </ContactUsContainer>
   );
