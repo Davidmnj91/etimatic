@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "etimatic": "apps/etimatic",
+    "etimatic-e2e": "apps/etimatic-e2e"
+  }
+}

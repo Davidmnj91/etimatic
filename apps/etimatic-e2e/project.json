@@ -1,0 +1,28 @@
+{
+  "root": "apps/etimatic-e2e",
+  "sourceRoot": "apps/etimatic-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/etimatic-e2e/cypress.json",
+        "devServerTarget": "etimatic:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "etimatic:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/etimatic-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["etimatic"]
+}
