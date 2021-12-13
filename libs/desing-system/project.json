@@ -1,0 +1,42 @@
+{
+  "root": "libs/desing-system",
+  "sourceRoot": "libs/desing-system/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/desing-system",
+        "tsConfig": "libs/desing-system/tsconfig.lib.json",
+        "project": "libs/desing-system/package.json",
+        "entryFile": "libs/desing-system/src/index.ts",
+        "external": ["react/jsx-runtime"],
+        "rollupConfig": "@nrwl/react/plugins/bundle-rollup",
+        "assets": [
+          {
+            "glob": "libs/desing-system/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/desing-system/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/desing-system"],
+      "options": {
+        "jestConfig": "libs/desing-system/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

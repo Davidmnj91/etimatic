@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "desing-system": "libs/desing-system",
     "etimatic": "apps/etimatic",
     "etimatic-e2e": "apps/etimatic-e2e"
   }

@@ -1,16 +1,22 @@
+import { BreakpointProvider, lightTheme } from 'design-system';
 import { AppProps } from 'next/app';
-import Head from 'next/head';
+import { ThemeProvider } from 'styled-components';
+import MainLayout from '../components/MainLayout';
+import { ConstantsProvider } from '../config/constants';
 import './styles.css';
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <Head>
-        <title>Welcome to etimatic!</title>
-      </Head>
-      <main className="app">
-        <Component {...pageProps} />
-      </main>
+      <ThemeProvider theme={lightTheme}>
+        <BreakpointProvider breakpoints={lightTheme.breakPoints}>
+          <ConstantsProvider>
+            <MainLayout>
+              <Component {...pageProps} />
+            </MainLayout>
+          </ConstantsProvider>
+        </BreakpointProvider>
+      </ThemeProvider>
     </>
   );
 }
