@@ -6,6 +6,8 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
+    "affected": "nx affected:apps",
+    "graph": "nx dep-graph",
     "design-system:storybook": "nx run design-system:storybook",
     "design-system:build-storybook": "nx run design-system:build-storybook"
   },
