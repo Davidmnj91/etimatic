@@ -38,7 +38,7 @@ export default class CustomDocument extends Document<{
           <script async src="https://www.googletagmanager.com/gtag/js?id=G-0FMVBG47XE"></script>
           <script
             dangerouslySetInnerHTML={{
-              __html: `window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-0FMVBG47XE');`,
+              __html: `window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-0FMVBG47XE', { 'debug_mode':true });`,
             }}
           ></script>
           <script
