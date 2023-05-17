@@ -1,15 +1,19 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import {
+  NextApiRequest,
+  NextApiResponse,
+} from 'next';
 import nodemailer from 'nodemailer';
+
 import { Constants } from '../../config/constants';
 
 const transporter = nodemailer.createTransport({
-  port: 465,
   host: process.env.MAIL_HOST,
+  port: 465,
+  secure: true,
   auth: {
     user: Constants.mail,
     pass: process.env.MAIL_PASSWORD,
   },
-  secure: true,
 });
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -20,9 +24,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     html: `<div>${req.body.message}</div><p>Enviado por: ${req.body.name} (${req.body.email})</p>`,
   };
 
-  await transporter.sendMail(mailData);
+  try {
+    await transporter.sendMail(mailData);
+    res.status(200).send('Success');
+  } catch(err) {
+    console.error(err)
+    res.status(500)
+  }
 
-  res.send('Success');
 };
 
 export default handler;
