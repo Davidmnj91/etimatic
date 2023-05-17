@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react';
 
 export const Constants = {
-  mail: 'test@etimatic.com',
+  mail: 'yago@etimatic.com',
   location: {
     address: 'C/ Lepanto 71, Bajo. 30510',
     city: 'Yecla - Murcia',
