@@ -1,0 +1,33 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base"
+  ],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackagePatterns": ["*"],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch"
+    },
+    {
+      "matchPackagePatterns": ["^eslint", "prettier"],
+      "groupName": "ESLint and Prettier"
+    },
+    {
+      "matchPackagePatterns": ["^@types/"],
+      "groupName": "TypeScript definitions"
+    },
+    {
+      "matchPackagePatterns": ["^next", "@next/"],
+      "groupName": "Next.js"
+    },
+    {
+        "matchPackagePatterns": ["^tailwindcss", "postcss", "autoprefixer"],
+        "groupName": "Tailwind CSS"
+    }
+  ],
+  "docker": {
+    "file": "docker-compose.yml"
+  }
+}
