@@ -1,6 +1,33 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "$schema": "https://docs.renovate.json/renovate-schema.json",
   "extends": [
-    "config:recommended"
-  ]
+    "config:base"
+  ],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackagePatterns": ["*"],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch"
+    },
+    {
+      "matchPackagePatterns": ["^@nrwl/"],
+      "groupName": "Nx"
+    },
+    {
+      "matchPackagePatterns": ["^next", "react", "react-dom"],
+      "groupName": "Next.js and React"
+    },
+    {
+      "matchPackagePatterns": ["^eslint", "prettier"],
+      "groupName": "Linting and Formatting"
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
+    }
+  ],
+  "docker": {
+    "file": "Dockerfile"
+  }
 }
