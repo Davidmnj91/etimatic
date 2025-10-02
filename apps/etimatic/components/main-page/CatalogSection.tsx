@@ -125,25 +125,22 @@ const Categories = [
   'Embalaje Decorado',
   'Bolsas Algodón y TNT',
   'Bolsas Papel',
-  'Sector Alimentario',
   'Decoración',
   'Cintas Decorativas e Impresas',
   'Etiquetas Adhesivas',
-  'Take Away',
   'Tendencias Etimatic',
-  // 'Papel Regalo',
+  'Papel Regalo',
 ];
 
 const CatalogItems = [
   { key: 'CATALOG_BOXES', image: 'images/catalog_boxes.png', url: './catalogs/catalog_boxes.pdf' },
   { key: 'CATALOG_BAG_COTTON', image: 'images/catalog_bag_cotton.png', url: './catalogs/catalog_bag_cotton.pdf' },
   { key: 'CATALOG_BAG_PAPER', image: 'images/catalog_bag_paper.png', url: './catalogs/catalog_bag_paper.pdf' },
-  { key: 'CATALOG_FOOD', image: 'images/catalog_food.png', url: './catalogs/catalog_food.pdf' },
   { key: 'CATALOG_DECORATION', image: 'images/catalog_decoration.png', url: './catalogs/catalog_decoration.pdf' },
   { key: 'CATALOG_CINTAS', image: 'images/catalog_cintas.png', url: './catalogs/catalog_cintas.pdf' },
   { key: 'CATALOG_STICKERS', image: 'images/catalog_stickers.png', url: './catalogs/catalog_stickers.pdf' },
-  { key: 'CATALOG_TAKEAWAY', image: 'images/catalog_takeaway.png', url: './catalogs/catalog_takeaway.pdf' },
   { key: 'CATALOG_TRENDS', image: 'images/catalog_trends.png', url: './catalogs/catalog_trends.pdf' },
+  { key: 'CATALOG_GIFTS', image: 'images/catalog_paper.png', url: './catalogs/catalog_paper.pdf' },
 ];
 
 const CatalogSection = () => {
